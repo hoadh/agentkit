@@ -1,0 +1,174 @@
+- argument_hint: ''
+  category: core
+  description: Answer technical and architectural questions.
+  name: /ask
+  path: ask.toml
+  power_level: 1
+- argument_hint: ''
+  category: core
+  description: Bootstrap a new project step by step
+  name: /bootstrap
+  path: bootstrap.toml
+  power_level: 5
+- argument_hint: ''
+  category: bootstrap
+  description: Bootstrap a new project automatically
+  name: /bootstrap:auto
+  path: bootstrap:auto.toml
+  power_level: 4
+- argument_hint: ''
+  category: bootstrap
+  description: Quickly bootstrap a new project automatically
+  name: /bootstrap:auto:fast
+  path: bootstrap:auto:fast.toml
+  power_level: 3
+- argument_hint: ''
+  category: bootstrap
+  description: Bootstrap project with parallel execution
+  name: /bootstrap:auto:parallel
+  path: bootstrap:auto:parallel.toml
+  power_level: 5
+- argument_hint: ''
+  category: core
+  description: ''
+  name: /coding-level
+  path: coding-level.toml
+  power_level: 0
+- argument_hint: ''
+  category: docs
+  description: Analyze the codebase and create initial documentation
+  name: /docs:init
+  path: docs:init.toml
+  power_level: 4
+- argument_hint: ''
+  category: docs
+  description: ''
+  name: /docs:summarize
+  path: docs:summarize.toml
+  power_level: 0
+- argument_hint: ''
+  category: docs
+  description: Analyze the codebase and update documentation
+  name: /docs:update
+  path: docs:update.toml
+  power_level: 3
+- argument_hint: ''
+  category: core
+  description: GeminiKit usage guide - just type naturally
+  name: /gk-help
+  path: gk-help.toml
+  power_level: 0
+- argument_hint: ''
+  category: core
+  description: Write some journal entries.
+  name: /journal
+  path: journal.toml
+  power_level: 1
+- argument_hint: ''
+  category: core
+  description: ''
+  name: /kanban
+  path: kanban.toml
+  power_level: 0
+- argument_hint: ''
+  category: core
+  description: Intelligent plan creation with prompt enhancement
+  name: /plan
+  path: plan.toml
+  power_level: 3
+- argument_hint: ''
+  category: plan
+  description: ''
+  name: /plan:archive
+  path: plan:archive.toml
+  power_level: 0
+- argument_hint: ''
+  category: plan
+  description: Analyze Github Actions logs and provide a plan to fix the issues
+  name: /plan:ci
+  path: plan:ci.toml
+  power_level: 0
+- argument_hint: ''
+  category: plan
+  description: Create a CRO plan for the given content
+  name: /plan:cro
+  path: plan:cro.toml
+  power_level: 0
+- argument_hint: ''
+  category: plan
+  description: No research. Only analyze and create an implementation plan
+  name: /plan:fast
+  path: plan:fast.toml
+  power_level: 2
+- argument_hint: ''
+  category: plan
+  description: Research, analyze, and create an implementation plan
+  name: /plan:hard
+  path: plan:hard.toml
+  power_level: 3
+- argument_hint: ''
+  category: plan
+  description: Create detailed plan with parallel-executable phases
+  name: /plan:parallel
+  path: plan:parallel.toml
+  power_level: 3
+- argument_hint: ''
+  category: plan
+  description: Research & create an implementation plan with 2 approaches
+  name: /plan:two
+  path: plan:two.toml
+  power_level: 4
+- argument_hint: ''
+  category: plan
+  description: Validate plan with critical questions interview
+  name: /plan:validate
+  path: plan:validate.toml
+  power_level: 0
+- argument_hint: ''
+  category: core
+  description: View files/directories OR generate visual explanations, slides, diagrams
+  name: /preview
+  path: preview.toml
+  power_level: 0
+- argument_hint: ''
+  category: review
+  description: Scan & analyze the codebase.
+  name: /review:codebase
+  path: review:codebase.toml
+  power_level: 3
+- argument_hint: ''
+  category: review
+  description: Ultrathink edge cases, then parallel verify with code-reviewers
+  name: /review:codebase:parallel
+  path: review:codebase:parallel.toml
+  power_level: 3
+- argument_hint: ''
+  category: core
+  description: Run tests locally and analyze the summary report.
+  name: /test
+  path: test.toml
+  power_level: 1
+- argument_hint: ''
+  category: test
+  description: ''
+  name: /test:ui
+  path: test:ui.toml
+  power_level: 0
+- argument_hint: ''
+  category: core
+  description: Utilize tools of Model Context Protocol (MCP) servers
+  name: /use-mcp
+  path: use-mcp.toml
+  power_level: 0
+- argument_hint: ''
+  category: core
+  description: Review recent changes and wrap up the work
+  name: /watzup
+  path: watzup.toml
+  power_level: 1
+- argument_hint: ''
+  category: core
+  description: ''
+  name: /worktree
+  path: worktree.toml
+  power_level: 0
