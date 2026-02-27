@@ -282,7 +282,7 @@ plans/{YYMMDD}-{HHMM}-{slug}/
 * Key dependencies
 
 #### Phase Files (phase-XX-name.md)
-Follow the `./docs/development-rules.md` file. Each phase file should contain:
+Follow the `~/.gemini/rules/development-rules.md` file. Each phase file should contain:
 
 * **Context Links** — Links to related reports, files, documentation
 * **Overview** — Priority, current status, brief description
