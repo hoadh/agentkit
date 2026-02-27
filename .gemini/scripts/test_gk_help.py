@@ -18,7 +18,7 @@ failed = 0
 failures = []
 
 
-def run_ck_help(args: str) -> tuple[str, int]:
+def run_gk_help(args: str) -> tuple[str, int]:
     """Run gk-help.py with given arguments and return (output, exit_code)."""
     cmd = [sys.executable, str(SCRIPT_PATH)] + (args.split() if args else [])
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -29,7 +29,7 @@ def test(name: str, args: str, expect_contains: list[str] = None, expect_type: s
     """Run a test case and check expectations."""
     global passed, failed, failures
 
-    output, code = run_ck_help(args)
+    output, code = run_gk_help(args)
     success = True
     errors = []
 

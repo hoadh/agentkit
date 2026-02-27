@@ -8,7 +8,7 @@ from pathlib import Path
 SCRIPT = Path(__file__).parent / "gk-help.py"
 
 
-def run_ck_help(query: str) -> str:
+def run_gk_help(query: str) -> str:
     """Run gk-help.py with query and return output."""
     result = subprocess.run(
         [sys.executable, str(SCRIPT)] + query.split(),
@@ -20,7 +20,7 @@ def run_ck_help(query: str) -> str:
 
 def test_routes_to_category(query: str, expected_category: str) -> bool:
     """Check if query routes to expected category via keywords in output."""
-    output = run_ck_help(query).lower()
+    output = run_gk_help(query).lower()
     # Check various markers that indicate the category
     markers = {
         "notifications": ["discord", "telegram", "slack", "webhook", "notify", "session notifications"],
@@ -90,7 +90,7 @@ def run_test_suite(name: str, tests: list) -> tuple:
         else:
             failed += 1
             # Show actual output for debugging
-            output = run_ck_help(query)
+            output = run_gk_help(query)
             print(f"   Actual output preview: {output[:100]}...")
 
     return passed, failed

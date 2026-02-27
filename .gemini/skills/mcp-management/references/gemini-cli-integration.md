@@ -2,7 +2,7 @@
 
 ## Model Configuration
 
-Read model from `.gemini/.agent.json`: `gemini.model` (default: `gemini-3-flash-preview`)
+Read model from `.gemini/.agent.json`: `gemini.model` (default: `gemini-3.1-pro-preview`)
 
 ## ⚠️ CRITICAL: Use Stdin Piping, NOT -p Flag
 
@@ -12,7 +12,7 @@ The `-p` flag is **deprecated** and skips MCP server initialization, causing too
 # ❌ WRONG - Deprecated -p flag skips MCP connections!
 gemini -y -m <gemini.model> -p "Take a screenshot"
 # Also wrong: Using --model instead of -m
-gemini -y -p "Take a screenshot" --model gemini-3-flash-preview
+gemini -y -p "Take a screenshot" --model gemini-3.1-pro-preview
 
 # ✅ CORRECT - This initializes MCP servers
 echo "Take a screenshot" | gemini -y -m <gemini.model>
@@ -77,6 +77,7 @@ echo "<prompt>" | gemini [flags]
   - `gemini-3-flash-preview` (fast, recommended for MCP)
   - `gemini-3-pro-preview` (balanced)
   - `gemini-pro` (high quality)
+  - `gemini-3.1-pro-preview` (flaship)
 
 ### Examples
 

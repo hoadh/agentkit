@@ -17,7 +17,7 @@ RESET = "\033[0m"
 SCRIPT_PATH = Path(__file__).parent / "gk-help.py"
 
 
-def run_ck_help(*args):
+def run_gk_help(*args):
     """Run gk-help.py with given arguments and return output."""
     result = subprocess.run(
         [sys.executable, str(SCRIPT_PATH)] + list(args),
@@ -29,7 +29,7 @@ def run_ck_help(*args):
 
 def test_case(name, args, expected_patterns, unexpected_patterns=None):
     """Run a test case and check for expected patterns."""
-    output = run_ck_help(*args) if args else run_ck_help()
+    output = run_gk_help(*args) if args else run_gk_help()
 
     passed = True
     errors = []
