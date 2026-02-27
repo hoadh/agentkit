@@ -79,14 +79,14 @@ def main():
     test(
         "1.1 Empty input → overview",
         "",
-        expect_contains=["GeminiKit Commands", "Quick Start"],
+        expect_contains=["AgentKit Commands", "Quick Start"],
         expect_type="category-guide"
     )
 
     test(
         "1.2 Single space → overview",
         " ",
-        expect_contains=["GeminiKit Commands"],
+        expect_contains=["AgentKit Commands"],
         expect_type="category-guide"
     )
 
@@ -161,7 +161,7 @@ def main():
         ("integrate", "Integration"),
         ("skill", "Skill Management"),
         ("scout", "Codebase Exploration"),
-        ("config", "GeminiKit Configuration"),
+        ("config", "AgentKit Configuration"),
         ("coding-level", "Coding Level"),
         ("worktree", "Git Worktrees"),
         ("kanban", "AI Orchestration"),
@@ -306,14 +306,14 @@ def main():
     test(
         "6.1 'config' → comprehensive docs",
         "config",
-        expect_contains=["GeminiKit Configuration", ".agent.json"],
+        expect_contains=["AgentKit Configuration", ".agent.json"],
         expect_type="comprehensive-docs"
     )
 
     test(
         "6.2 '.agent.json' → comprehensive docs",
         ".agent.json",
-        expect_contains=["GeminiKit Configuration"],
+        expect_contains=["AgentKit Configuration"],
         expect_type="comprehensive-docs"
     )
 

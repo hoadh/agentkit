@@ -1,5 +1,5 @@
 /**
- * Shared utilities for GeminiKit hooks
+ * Shared utilities for AgentKit hooks
  *
  * Contains config loading, path sanitization, and common constants
  * used by session-init.cjs and dev-rules-reminder.cjs
@@ -297,7 +297,7 @@ function execSafe(cmd, options = {}) {
  * - 'mostRecent': REMOVED - was causing stale plan pollution
  *
  * @param {string} sessionId - Session identifier (optional)
- * @param {Object} config - GeminiKit config
+ * @param {Object} config - AgentKit config
  * @returns {{ path: string|null, resolvedBy: 'session'|'branch'|null }} Resolution result with tracking
  */
 function resolvePlanPath(sessionId, config) {

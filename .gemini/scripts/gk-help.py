@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-GeminiKit Help Command - All-in-one guide with dynamic command discovery.
+AgentKit Help Command - All-in-one guide with dynamic command discovery.
 Scans .gemini/commands/ directory to build catalog at runtime.
 
 Usage:
@@ -218,7 +218,7 @@ CATEGORY_GUIDES = {
         "tip": "Set in .gemini.json. Guidelines auto-inject on session start",
     },
     "config": {
-        "title": "GeminiKit Configuration (.gemini.json)",
+        "title": "AgentKit Configuration (.gemini.json)",
         "workflow": [
             ("Global", "Set user prefs in `~/.gemini/.gemini.json`"),
             ("Local", "Override per-project in `./.gemini.json`"),
@@ -442,7 +442,7 @@ def show_overview(data: dict, prefix: str) -> None:
     total = sum(len(cmds) for cmds in commands.values())
     help_cmd = f"/{prefix}gk-help" if prefix else "/gk-help"
 
-    print("# GeminiKit Commands")
+    print("# AgentKit Commands")
     print()
     print(f"{total} commands across {len(categories)} categories.")
     print()
@@ -751,7 +751,7 @@ def show_config_guide() -> None:
     """Display comprehensive .agent.json configuration guide."""
     emit_output_type("comprehensive-docs")
 
-    print("# GeminiKit Configuration (.agent.json)")
+    print("# AgentKit Configuration (.agent.json)")
     print()
     print("**Locations (cascading resolution):**")
     print("- Global: `~/.gemini/.agent.json` (user preferences)")

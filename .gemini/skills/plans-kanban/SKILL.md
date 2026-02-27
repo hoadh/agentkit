@@ -12,8 +12,8 @@ Plans dashboard server with progress tracking and timeline visualization.
 **This skill requires npm dependencies.** Run one of the following:
 
 ```bash
-# Option 1: Install via GeminiKit CLI (recommended)
-gk init  # Runs install.sh which handles all skills
+# Option 1: Install via AgentKit CLI (recommended)
+./setup.sh  # Runs setup.sh which handles all skills
 
 # Option 2: Manual installation
 cd .gemini/skills/plans-kanban

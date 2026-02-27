@@ -1,7 +1,7 @@
-description = "GeminiKit usage guide - just type naturally"
+description = "AgentKit usage guide - just type naturally"
 prompt = """
 Think harder.
-All-in-one GeminiKit guide. Run the script and present output based on type markers.
+All-in-one AgentKit guide. Run the script and present output based on type markers.
 
 ## Intent Validation
 

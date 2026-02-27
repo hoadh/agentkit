@@ -73,7 +73,7 @@ function convertHook(claudeHook, claudeEvent) {
     type: 'command',
     command: `node $GEMINI_PROJECT_DIR/.gemini/hooks/gemini/${adapterFile}`,
     timeout: claudeHook.timeout ? claudeHook.timeout * 1000 : 5000,
-    description: `GeminiKit adapter: ${hookName}`
+    description: `AgentKit adapter: ${hookName}`
   };
 }
 

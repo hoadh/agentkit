@@ -54,7 +54,7 @@
   power_level: 3
 - argument_hint: ''
   category: core
-  description: GeminiKit usage guide - just type naturally
+  description: AgentKit usage guide - just type naturally
   name: /gk-help
   path: gk-help.toml
   power_level: 0

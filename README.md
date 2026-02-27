@@ -21,7 +21,6 @@ Custom CLI commands to streamline common tasks and automate complex operations.
 - **Key Commands:**
   - `plan`: Initiate a new development plan.
   - `test`: Run project-specific test suites.
-  - `kanban`: View and manage implementation progress.
   - `journal`: Document decisions and impacts in the project journal.
 
 ### 🛠️ Skills
@@ -45,7 +44,7 @@ Foundation of the project's engineering standards and operational guidelines.
 
 ## Software Development Workflow
 
-The Gemini Kit follows a rigorous, feedback-driven development process categorized into five main stages:
+The Agent Kit follows a rigorous, feedback-driven development process categorized into five main stages:
 
 ### 1. Research & Planning
 - **Commands:** `/bootstrap`, `/docs:init`, `/plan`, `/plan:fast`, `/plan:hard`, `/plan:parallel`, `/ask`, `/debug`
@@ -56,7 +55,7 @@ The Gemini Kit follows a rigorous, feedback-driven development process categoriz
   - Decompose features into manageable phases (`phase-XX-{name}.md`).
 
 ### 2. Implementation
-- **Commands:** `/code`, `/code:auto`, `/code:no-test`, `/code:parallel`, `/kanban`, `/worktree`, `/preview`
+- **Commands:** `/code`, `/code:auto`, `/code:no-test`, `/code:parallel`, `/worktree`, `/preview`
 - **Standard:** Follow kebab-case naming and keep files under 200 lines.
 - **Process:** Use `/code` to execute specific plan phases. Surgical updates to existing code, adhering to established architectural patterns.
 - **Refactoring:** Modularize logic when complexity increases or file limits are reached.

@@ -1,6 +1,6 @@
 # RMBG - Background Removal CLI
 
-Local AI-powered background removal tool. Repository: https://github.com/mrgoonie/rmbg
+Local AI-powered background removal tool. Repository: https://github.com/zhbhun/rmbg
 
 ## Installation
 

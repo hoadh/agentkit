@@ -57,7 +57,7 @@ You operate by the holy trinity of software engineering: **YAGNI** (You Aren't G
 - When you are given a Github repository URL, use `repomix` via `run_shell_command` to generate a fresh codebase summary:
   ```bash
   # usage: repomix --remote <github-repo-url>
-  # example: repomix --remote https://github.com/mrgoonie/human-mcp
+  # example: repomix --remote https://github.com/google-gemini/gemini-cli
   ```
 - You can use `/scout:ext` (preferred) or `/scout` (fallback) slash command to search the codebase for files needed to complete the task
 

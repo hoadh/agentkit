@@ -33,9 +33,9 @@ const USD_TO_VND_RATE = 24500; // 1 USD ≈ 24,500 VND
 
 ### Standard Format
 ```
-GeminiKit {order-uuid}
+AgentKit {order-uuid}
 ```
-Example: `GeminiKit 4e4635f4-0478-4080-a5c5-48da91f97f1e`
+Example: `AgentKit 4e4635f4-0478-4080-a5c5-48da91f97f1e`
 
 ### Team Checkout Format
 ```
@@ -45,7 +45,7 @@ Example: `TEAM4E4635F4`
 
 ### Why These Formats
 - UUID ensures global uniqueness
-- `GeminiKit` prefix for easy visual identification
+- `AgentKit` prefix for easy visual identification
 - Short team prefix fits bank memo limits
 - Case-insensitive matching handles bank transformations
 
@@ -77,9 +77,9 @@ const qrUrl = generateVietQRUrl(
   process.env.SEPAY_ACCOUNT_NUMBER!,
   process.env.SEPAY_BANK_NAME!,
   2450000,
-  `GeminiKit ${orderId}`
+  `AgentKit ${orderId}`
 );
-// Returns: https://qr.sepay.vn/img?acc=0123456789&bank=Vietcombank&amount=2450000&des=GeminiKit+uuid
+// Returns: https://qr.sepay.vn/img?acc=0123456789&bank=Vietcombank&amount=2450000&des=AgentKit+uuid
 ```
 
 ## Checkout API Implementation
@@ -164,7 +164,7 @@ export async function POST(request: Request) {
 
     // 6. Create order record
     const orderId = crypto.randomUUID();
-    const transactionContent = `GeminiKit ${orderId}`;
+    const transactionContent = `AgentKit ${orderId}`;
 
     const order = await db.insert(orders).values({
       id: orderId,
@@ -433,10 +433,10 @@ export async function findOrderByTransaction(
 export function parseOrderIdFromContent(content: string): string | null {
   if (!content) return null;
 
-  // Pattern 1: Standard "GeminiKit {uuid}"
-  const GeminiKitMatch = content.match(/GeminiKit\s+([\w-]+)/i);
-  if (GeminiKitMatch) {
-    return normalizeUUID(GeminiKitMatch[1]);
+  // Pattern 1: Standard "AgentKit {uuid}"
+  const AgentKitMatch = content.match(/AgentKit\s+([\w-]+)/i);
+  if (AgentKitMatch) {
+    return normalizeUUID(AgentKitMatch[1]);
   }
 
   // Pattern 2: UUID anywhere in content (banks may strip/transform content)
@@ -471,11 +471,11 @@ function normalizeUUID(input: string): string | null {
 
 ### Handled Content Formats
 ```
-GeminiKit 4e4635f4-0478-4080-a5c5-48da91f97f1e     ✅ Standard
-GeminiKit 4e4635f404784080a5c548da91f97f1e         ✅ Bank stripped dashes
-GeminiKit4e4635f404784080a5c548da91f97f1e          ✅ No space
-4e4635f404784080a5c548da91f97f1e-GeminiKit         ✅ Reversed
-GeminiKit 4e4635f4-0478-4080-a5c5-48da91f97f1e    ✅ Lowercase
+AgentKit 4e4635f4-0478-4080-a5c5-48da91f97f1e     ✅ Standard
+AgentKit 4e4635f404784080a5c548da91f97f1e         ✅ Bank stripped dashes
+AgentKit4e4635f404784080a5c548da91f97f1e          ✅ No space
+4e4635f404784080a5c548da91f97f1e-AgentKit         ✅ Reversed
+AgentKit 4e4635f4-0478-4080-a5c5-48da91f97f1e    ✅ Lowercase
 BankAPINotify 4e4635f404784080a5c548da91f97f1e... ✅ Extra prefix
 4e4635f404784080a5c548da91f97f1e                   ✅ UUID only
 ```
@@ -740,7 +740,7 @@ export function generateSepayInvoice(order: Order, transaction: TransactionInfo)
         </table>
 
         <p>Thank you for your purchase!</p>
-        <p>Support: support@GeminiKit.com</p>
+        <p>Support: support@AgentKit.com</p>
       </div>
     </body>
     </html>
@@ -811,12 +811,12 @@ if (transferAmount > order.amount) {
 // __tests__/lib/sepay.test.ts
 describe('parseOrderIdFromContent', () => {
   it('parses standard format', () => {
-    expect(parseOrderIdFromContent('GeminiKit 4e4635f4-0478-4080-a5c5-48da91f97f1e'))
+    expect(parseOrderIdFromContent('AgentKit 4e4635f4-0478-4080-a5c5-48da91f97f1e'))
       .toBe('4e4635f4-0478-4080-a5c5-48da91f97f1e');
   });
 
   it('handles bank dash-stripping', () => {
-    expect(parseOrderIdFromContent('GeminiKit 4e4635f404784080a5c548da91f97f1e'))
+    expect(parseOrderIdFromContent('AgentKit 4e4635f404784080a5c548da91f97f1e'))
       .toBe('4e4635f4-0478-4080-a5c5-48da91f97f1e');
   });
 
@@ -826,9 +826,9 @@ describe('parseOrderIdFromContent', () => {
   });
 
   it('returns null for invalid content', () => {
-    expect(parseOrderIdFromContent('GeminiKit')).toBeNull();
+    expect(parseOrderIdFromContent('AgentKit')).toBeNull();
     expect(parseOrderIdFromContent('4e4635f4-0478')).toBeNull();
-    expect(parseOrderIdFromContent('104588021672-GeminiKit')).toBeNull();
+    expect(parseOrderIdFromContent('104588021672-AgentKit')).toBeNull();
   });
 });
 ```
@@ -846,13 +846,13 @@ echo "Test 1: Bearer token auth"
 curl -X POST "$BASE_URL" \
   -H "Authorization: Bearer $API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"id":12345,"content":"GeminiKit test-uuid","transferAmount":2450000,"transferType":"in"}'
+  -d '{"id":12345,"content":"AgentKit test-uuid","transferAmount":2450000,"transferType":"in"}'
 
 # Test 2: Valid Apikey format
 echo "Test 2: Apikey auth"
 curl -X POST "$BASE_URL" \
   -H "Authorization: Apikey $API_KEY" \
-  -d '{"id":12346,"content":"GeminiKit test-uuid","transferAmount":2450000,"transferType":"in"}'
+  -d '{"id":12346,"content":"AgentKit test-uuid","transferAmount":2450000,"transferType":"in"}'
 
 # Test 3: Missing auth (should return 401)
 echo "Test 3: No auth (expect 401)"
