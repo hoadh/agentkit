@@ -282,14 +282,6 @@
   has_scripts: false
   name: planning
   path: planning/SKILL.md
-- category: other
-  description: View plans dashboard with progress tracking and timeline visualization.
-    Use for kanban boards, plan status overview, phase progress, milestone tracking,
-    project visibility.
-  has_references: false
-  has_scripts: true
-  name: plans-kanban
-  path: plans-kanban/SKILL.md
 - category: utilities
   description: Apply systematic problem-solving techniques when stuck. Use for complexity
     spirals, innovation blocks, recurring patterns, assumption constraints, simplification

@@ -146,7 +146,6 @@ TASK_MAPPINGS = {
     "coding-level": ["coding", "level", "eli5", "junior", "senior", "lead", "god", "beginner", "expert", "teach", "learn", "explain"],
     # New categories
     "worktree": ["worktree", "parallel", "isolate", "isolation", "concurrent", "multiple branches"],
-    "kanban": ["kanban", "board", "dashboard", "progress", "track", "orchestration", "visualize"],
     "preview": ["preview", "view", "render", "markdown", "reader", "novel", "explain", "slides", "diagram", "ascii", "visualize", "visual"],
     "journal": ["journal", "diary", "log", "entry", "reflect", "failure", "lesson"],
     "watzup": ["watzup", "status", "summary", "wrap up", "what's up", "recent", "changes"],
@@ -237,16 +236,6 @@ CATEGORY_GUIDES = {
             ("Remove worktree", "`/worktree remove <name>`"),
         ],
         "tip": "Use worktrees for parallel features without stashing. Each worktree = isolated branch + clean working directory",
-    },
-    "kanban": {
-        "title": "AI Orchestration Board",
-        "workflow": [
-            ("View dashboard", "`/kanban` (opens browser)"),
-            ("Specific plans", "`/kanban plans/my-feature/`"),
-            ("Track progress", "View phase completion, timeline, activity"),
-            ("Stop server", "`/kanban --stop`"),
-        ],
-        "tip": "Dashboard shows plan phases, progress bars, and agent activity. Future: worktree + agent orchestration",
     },
     "preview": {
         "title": "Content Preview & Visual Generation",
@@ -488,7 +477,7 @@ def show_category_guide(data: dict, category: str, prefix: str) -> None:
             cat_key = key
             break
 
-    # Also check CATEGORY_GUIDES for categories without discovered commands (worktree, kanban, etc.)
+    # Also check CATEGORY_GUIDES for categories without discovered commands (worktree, etc.)
     if not cat_key:
         for key in CATEGORY_GUIDES.keys():
             if key.lower() == category_lower:

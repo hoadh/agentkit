@@ -66,12 +66,6 @@
   power_level: 1
 - argument_hint: ''
   category: core
-  description: ''
-  name: /kanban
-  path: kanban.toml
-  power_level: 0
-- argument_hint: ''
-  category: core
   description: Intelligent plan creation with prompt enhancement
   name: /plan
   path: plan.toml

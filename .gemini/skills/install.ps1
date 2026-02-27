@@ -688,17 +688,6 @@ function Install-NodeDeps {
         Write-Success "markdown-novel-viewer dependencies installed"
     }
 
-    # plans-kanban (gray-matter)
-    $plansKanbanPath = Join-Path $ScriptDir "plans-kanban"
-    $plansKanbanPackageJson = Join-Path $plansKanbanPath "package.json"
-    if ((Test-Path $plansKanbanPath) -and (Test-Path $plansKanbanPackageJson)) {
-        Write-Info "Installing plans-kanban dependencies..."
-        Push-Location $plansKanbanPath
-        npm install --quiet
-        Pop-Location
-        Write-Success "plans-kanban dependencies installed"
-    }
-
     # Optional: Shopify CLI (ask user unless auto-confirming)
     $shopifyPath = Join-Path $ScriptDir "shopify"
     if (Test-Path $shopifyPath) {

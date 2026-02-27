@@ -73,12 +73,6 @@ def main():
     ))
 
     tests.append(test_case(
-        "kanban category",
-        ["kanban"],
-        ["AI Orchestration Board", "/kanban", "dashboard", "progress"]
-    ))
-
-    tests.append(test_case(
         "preview category",
         ["preview"],
         ["Content Preview", "Novel Reader", "/preview", "markdown"]

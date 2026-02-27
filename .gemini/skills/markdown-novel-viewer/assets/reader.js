@@ -20,7 +20,7 @@
   const shortcutsToast = document.getElementById('shortcuts-toast');
   const shortcutsOverlay = document.getElementById('shortcuts-overlay');
 
-  // Storage keys (shared with kanban dashboard for theme persistence)
+  // Storage keys (theme persistence)
   const THEME_KEY = 'theme';
   const FONT_KEY = 'novel-viewer-font';
   const SIDEBAR_KEY = 'novel-viewer-sidebar';

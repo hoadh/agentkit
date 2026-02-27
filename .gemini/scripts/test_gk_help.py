@@ -164,7 +164,6 @@ def main():
         ("config", "AgentKit Configuration"),
         ("coding-level", "Coding Level"),
         ("worktree", "Git Worktrees"),
-        ("kanban", "AI Orchestration"),
         ("preview", "Content Preview"),
         ("journal", "Technical Journaling"),
         ("brainstorm", "Brainstorming"),
@@ -389,12 +388,6 @@ def main():
         "8.2 'worktree' shows workflow",
         "worktree",
         expect_contains=["Git Worktrees", "Workflow"]
-    )
-
-    test(
-        "8.3 'kanban' shows workflow",
-        "kanban",
-        expect_contains=["AI Orchestration", "Workflow"]
     )
 
     # =========================================

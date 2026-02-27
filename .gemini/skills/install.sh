@@ -648,13 +648,6 @@ install_node_deps() {
         print_success "markdown-novel-viewer dependencies installed"
     fi
 
-    # plans-kanban (gray-matter)
-    if [ -d "$SCRIPT_DIR/plans-kanban" ] && [ -f "$SCRIPT_DIR/plans-kanban/package.json" ]; then
-        print_info "Installing plans-kanban dependencies..."
-        (cd "$SCRIPT_DIR/plans-kanban" && npm install --quiet)
-        print_success "plans-kanban dependencies installed"
-    fi
-
     # Optional: Shopify CLI (ask user unless auto-confirming)
     if [ -d "$SCRIPT_DIR/shopify" ]; then
         if [[ "$SKIP_CONFIRM" == "true" ]]; then
