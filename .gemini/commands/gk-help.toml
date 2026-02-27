@@ -30,7 +30,7 @@ The Python script only understands English keywords. If `{{args}}` is in another
 ## Execution
 
 ```bash
-python scripts/gk-help.py "{{args}}"
+python .gemini/scripts/gk-help.py "{{args}}"
 ```
 
 ## Output Type Detection

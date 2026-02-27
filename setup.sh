@@ -189,6 +189,7 @@ if [ "$scope_choice" == "1" ]; then
         sed -i '' \
             -e 's|node \.gemini/|node ~/.gemini/|g' \
             -e 's|python3 \.gemini/|python3 ~/.gemini/|g' \
+            -e 's|python \.gemini/|python ~/.gemini/|g' \
             "$file"
     done
     echo -e "${GREEN}  exec paths rewritten (.gemini/ -> ~/.gemini/)${NC}"
