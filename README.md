@@ -1,6 +1,6 @@
-# Gemini Kit
+# Agent Kit
 
-Gemini Kit is a comprehensive toolkit for building and managing AI-driven software development workflows. It leverages specialized agents, modular skills, and custom commands to automate and enhance every stage of the development lifecycle.
+Agent Kit is a comprehensive toolkit for building and managing AI-driven software development workflows. It leverages specialized agents, modular skills, and custom commands to automate and enhance every stage of the development lifecycle.
 
 ## Core Components
 
@@ -48,25 +48,24 @@ Foundation of the project's engineering standards and operational guidelines.
 The Gemini Kit follows a rigorous, feedback-driven development process categorized into five main stages:
 
 ### 1. Research & Planning
-- **Commands:** `/bootstrap`, `/docs:init`, `/plan`, `/plan:fast`, `/plan:parallel`, `/ask`
-- **Strategy:** Every task starts with an implementation plan in the `./plans/` directory. For new projects, use `/bootstrap` to scaffold everything. For existing projects, use `/docs:init` to analyze the codebase and generate initial documentation.
+- **Commands:** `/bootstrap`, `/docs:init`, `/plan`, `/plan:fast`, `/plan:hard`, `/plan:parallel`, `/ask`, `/debug`
+- **Strategy:** Every task starts with an implementation plan in the `./plans/` directory. For new projects, use `/bootstrap` to scaffold everything. Use `/debug` to investigate issues and `/docs:init` to analyze existing codebases.
 - **Execution:** 
   - Identify requirements and dependencies.
   - Research technical solutions in parallel using the `research` skill.
   - Decompose features into manageable phases (`phase-XX-{name}.md`).
 
 ### 2. Implementation
-- **Commands:** `/kanban`, `/worktree`, `/preview`
+- **Commands:** `/code`, `/code:auto`, `/code:no-test`, `/code:parallel`, `/kanban`, `/worktree`, `/preview`
 - **Standard:** Follow kebab-case naming and keep files under 200 lines.
-- **Process:** Surgical updates to existing code, adhering to established architectural patterns.
+- **Process:** Use `/code` to execute specific plan phases. Surgical updates to existing code, adhering to established architectural patterns.
 - **Refactoring:** Modularize logic when complexity increases or file limits are reached.
 
 ### 3. Testing & Validation
-- **Commands:** `/test`, `/test:ui`
+- **Commands:** `/test`, `/test:ui`, `/fix`, `/fix:fast`, `/fix:hard`, `/fix:parallel`, `/fix:test`, `/fix:types`, `/fix:ci`, `/fix:logs`, `/fix:ui`
 - **Requirement:** Mandatory unit tests for all new features and bug fixes.
-- **Process:** 
-  - Fix failing tests immediately; never bypass CI/CD or build checks.
-  - Validate performance and security requirements during the execution phase.
+- **Process:** Use `/test` to verify requirements. If failures occur, use `/fix` for intelligent routing to specialized fix commands (types, UI, logs, etc.).
+- **Stability:** Fix failing tests immediately; never bypass CI/CD or build checks.
 
 ### 4. Code Quality & Review
 - **Commands:** `/review:codebase`, `/review:codebase:parallel`
@@ -75,10 +74,10 @@ The Gemini Kit follows a rigorous, feedback-driven development process categoriz
 - **Output:** Generate reports in `./plans/reports/` using specific skill report types (e.g., `code-reviewer`, `tester`).
 
 ### 5. Integration & Documentation
-- **Commands:** `/journal`, `/docs:update`, `/docs:summarize`
+- **Commands:** `/journal`, `/docs:update`, `/docs:summarize`, `/watzup`
 - **Sync:** Seamlessly integrate with existing code and maintain backward compatibility.
-- **Documentation:** Update `./docs/` files (Roadmap, Changelog, System Architecture) after every major change.
-- **Journaling:** Use the `journal` command to record key decisions and their impacts.
+- **Documentation:** Update `./docs/` files (Roadmap, Changelog, System Architecture) after every major change using `/docs:update`.
+- **Journaling:** Use the `/journal` command to record key decisions and their impacts. Use `/watzup` for a quick status overview.
 
 ---
 

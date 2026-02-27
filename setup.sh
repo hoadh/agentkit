@@ -120,7 +120,7 @@ safe_sync_file() {
 # ─── Main Script ───
 
 echo -e "${BLUE}=========================================${NC}"
-echo -e "${BLUE}  Gemini Kit - Workflow & Skills Setup   ${NC}"
+echo -e "${BLUE}  Agent Kit - Workflow & Skills Setup   ${NC}"
 echo -e "${BLUE}=========================================${NC}\n"
 
 echo "Please choose the installation scope:"
