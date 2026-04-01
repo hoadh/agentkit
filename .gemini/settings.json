@@ -25,7 +25,7 @@
         ]
       }
     ],
-    "SubagentStart": [
+    "BeforeAgent": [
       {
         "matcher": "*",
         "hooks": [
@@ -40,7 +40,7 @@
         ]
       }
     ],
-    "SubagentStop": [
+    "AfterAgent": [
       {
         "matcher": "Plan",
         "hooks": [
@@ -59,7 +59,7 @@
         ]
       }
     ],
-    "UserPromptSubmit": [
+    "BeforeModel": [
       {
         "hooks": [
           {
@@ -74,7 +74,7 @@
         ]
       }
     ],
-    "PreToolUse": [
+    "BeforeTool": [
       {
         "matcher": "write_to_file",
         "hooks": [
@@ -98,7 +98,7 @@
         ]
       }
     ],
-    "Stop": [
+    "SessionEnd": [
       {
         "hooks": [
           {
@@ -108,7 +108,7 @@
         ]
       }
     ],
-    "PostToolUse": [
+    "AfterTool": [
       {
         "matcher": "replace_file_content|write_to_file|multi_replace_file_content",
         "hooks": [
