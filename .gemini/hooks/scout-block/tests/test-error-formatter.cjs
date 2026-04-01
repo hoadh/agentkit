@@ -40,13 +40,13 @@ console.log('\n--- formatBlockedError Tests ---');
 const blockError = formatBlockedError({
   path: 'packages/web/node_modules/react',
   pattern: 'node_modules',
-  tool: 'Bash',
+  tool: 'run_command',
   geminiDir: '/home/user/project/.gemini'
 });
 test('formatBlockedError contains BLOCKED', blockError.includes('BLOCKED'));
 test('formatBlockedError contains path', blockError.includes('packages/web/node_modules/react'));
 test('formatBlockedError contains pattern', blockError.includes('node_modules'));
-test('formatBlockedError contains tool', blockError.includes('Bash'));
+test('formatBlockedError contains tool', blockError.includes('run_command'));
 test('formatBlockedError contains fix hint', blockError.includes('!node_modules'));
 
 // Test long path truncation
@@ -54,7 +54,7 @@ const longPath = 'a/'.repeat(50) + 'node_modules/package/index.js';
 const longPathError = formatBlockedError({
   path: longPath,
   pattern: 'node_modules',
-  tool: 'Read',
+  tool: 'view_file',
   geminiDir: '.gemini'
 });
 test('formatBlockedError truncates long path', longPathError.includes('...'));
@@ -71,7 +71,7 @@ console.log('\n--- formatMachineError Tests ---');
 const machineError = formatMachineError({
   path: 'dist/bundle.js',
   pattern: 'dist',
-  tool: 'Read',
+  tool: 'view_file',
   geminiDir: '.gemini'
 });
 const parsed = JSON.parse(machineError);
@@ -79,7 +79,7 @@ test('formatMachineError is valid JSON', typeof parsed === 'object');
 test('formatMachineError has error field', parsed.error === 'BLOCKED');
 test('formatMachineError has path field', parsed.path === 'dist/bundle.js');
 test('formatMachineError has pattern field', parsed.pattern === 'dist');
-test('formatMachineError has tool field', parsed.tool === 'Read');
+test('formatMachineError has tool field', parsed.tool === 'view_file');
 test('formatMachineError has fix field', parsed.fix.includes('!dist'));
 
 // formatWarning tests

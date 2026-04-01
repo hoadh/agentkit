@@ -231,7 +231,7 @@ function checkPrivacy({ toolName, toolInput, options = {} }) {
     return { blocked: false };
   }
 
-  const isBashTool = toolName === 'Bash';
+  const isBashTool = toolName === 'run_command';
   const paths = extractPaths(toolInput);
 
   // Check each path

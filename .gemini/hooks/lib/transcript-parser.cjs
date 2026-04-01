@@ -250,16 +250,16 @@ function extractTarget(toolName, input) {
   if (!input) return null;
 
   switch (toolName) {
-    case 'Read':
-    case 'Write':
-    case 'Edit':
+    case 'view_file':
+    case 'write_to_file':
+    case 'replace_file_content':
       return input.file_path ?? input.path ?? null;
 
-    case 'Glob':
-    case 'Grep':
+    case 'list_dir':
+    case 'grep_search':
       return input.pattern ?? null;
 
-    case 'Bash':
+    case 'run_command':
       const cmd = input.command;
       if (!cmd) return null;
       return cmd.length > 30 ? cmd.slice(0, 30) + '...' : cmd;

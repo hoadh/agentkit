@@ -274,32 +274,32 @@ describe('checkScoutBlock - Bash commands', () => {
   // --- Should BLOCK ---
   describe('blocked commands', () => {
     it('blocks ls node_modules', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'ls node_modules' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'ls node_modules' }, options: DEFAULT_OPTS });
       assert.ok(r.blocked);
     });
 
     it('blocks cd build', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'cd build' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'cd build' }, options: DEFAULT_OPTS });
       assert.ok(r.blocked);
     });
 
     it('blocks cat dist/bundle.js', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'cat dist/bundle.js' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'cat dist/bundle.js' }, options: DEFAULT_OPTS });
       assert.ok(r.blocked);
     });
 
     it('blocks ls packages/web/node_modules', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'ls packages/web/node_modules' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'ls packages/web/node_modules' }, options: DEFAULT_OPTS });
       assert.ok(r.blocked);
     });
 
     it('blocks cat .venv/lib/python3.11/site.py', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'cat .venv/lib/python3.11/site.py' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'cat .venv/lib/python3.11/site.py' }, options: DEFAULT_OPTS });
       assert.ok(r.blocked);
     });
 
     it('blocks ls -la .venv/', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'ls -la .venv/' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'ls -la .venv/' }, options: DEFAULT_OPTS });
       assert.ok(r.blocked);
     });
   });
@@ -307,27 +307,27 @@ describe('checkScoutBlock - Bash commands', () => {
   // --- Should ALLOW (build commands) ---
   describe('allowed build commands', () => {
     it('allows npm build', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'npm build' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'npm build' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
 
     it('allows npm run build', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'npm run build' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'npm run build' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
 
     it('allows pnpm --filter web run build', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'pnpm --filter web run build 2>&1 | tail -100' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'pnpm --filter web run build 2>&1 | tail -100' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
 
     it('allows npx tsc', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'npx tsc' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'npx tsc' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
 
     it('allows go build', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'go build ./cmd/server' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'go build ./cmd/server' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
   });
@@ -335,17 +335,17 @@ describe('checkScoutBlock - Bash commands', () => {
   // --- Should ALLOW (venv) ---
   describe('allowed venv commands', () => {
     it('allows .venv/bin/python3 execution', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: '~/.gemini/skills/.venv/bin/python3 script.py' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: '~/.gemini/skills/.venv/bin/python3 script.py' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
 
     it('allows python3 -m venv .venv', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'python3 -m venv .venv' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'python3 -m venv .venv' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
 
     it('allows uv venv', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'uv venv' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'uv venv' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
   });
@@ -353,37 +353,37 @@ describe('checkScoutBlock - Bash commands', () => {
   // --- Compound commands ---
   describe('compound commands', () => {
     it('allows echo + npm run build (newline)', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'echo "Checking..."\nnpm run build 2>&1 | tail -15' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'echo "Checking..."\nnpm run build 2>&1 | tail -15' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
 
     it('allows echo + npm run build (&&)', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'echo "Building..." && npm run build' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'echo "Building..." && npm run build' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
 
     it('allows npm install + npm run build', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'npm install && npm run build' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'npm install && npm run build' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
 
     it('blocks echo + cd node_modules', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'echo test && cd node_modules' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'echo test && cd node_modules' }, options: DEFAULT_OPTS });
       assert.ok(r.blocked);
     });
 
     it('blocks npm run build + cat dist/bundle.js', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'npm run build && cat dist/bundle.js' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'npm run build && cat dist/bundle.js' }, options: DEFAULT_OPTS });
       assert.ok(r.blocked);
     });
 
     it('allows all-allowed compound command', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'npm install && npm run build && npm test' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'npm install && npm run build && npm test' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
 
     it('blocks when ONE sub-command accesses blocked dir', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'npm install && ls node_modules && npm test' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'npm install && ls node_modules && npm test' }, options: DEFAULT_OPTS });
       assert.ok(r.blocked);
     });
   });
@@ -391,17 +391,17 @@ describe('checkScoutBlock - Bash commands', () => {
   // --- Safe commands (no blocked paths) ---
   describe('safe commands (no blocked paths)', () => {
     it('allows ls src/', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'ls src/' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'ls src/' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
 
     it('allows cat src/index.ts', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'cat src/index.ts' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'cat src/index.ts' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
 
     it('allows python3 --version', () => {
-      const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'python3 --version' }, options: DEFAULT_OPTS });
+      const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'python3 --version' }, options: DEFAULT_OPTS });
       assert.ok(!r.blocked);
     });
   });
@@ -409,50 +409,50 @@ describe('checkScoutBlock - Bash commands', () => {
 
 describe('checkScoutBlock - non-Bash tools', () => {
   it('blocks Read with node_modules file_path', () => {
-    const r = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: 'node_modules/package.json' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: 'node_modules/package.json' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('blocks Grep with node_modules path', () => {
-    const r = checkScoutBlock({ toolName: 'Grep', toolInput: { pattern: 'test', path: 'node_modules' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'grep_search', toolInput: { pattern: 'test', path: 'node_modules' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('allows Grep with src path', () => {
-    const r = checkScoutBlock({ toolName: 'Grep', toolInput: { pattern: 'test', path: 'src' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'grep_search', toolInput: { pattern: 'test', path: 'src' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows Read with safe file_path', () => {
-    const r = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: 'src/index.js' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: 'src/index.js' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('blocks Glob with broad pattern', () => {
-    const r = checkScoutBlock({ toolName: 'Glob', toolInput: { pattern: '**/*.ts' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'list_dir', toolInput: { pattern: '**/*.ts' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
     assert.ok(r.isBroadPattern);
   });
 
   it('allows Glob with scoped pattern', () => {
-    const r = checkScoutBlock({ toolName: 'Glob', toolInput: { pattern: 'src/**/*.ts' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'list_dir', toolInput: { pattern: 'src/**/*.ts' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 });
 
 describe('checkScoutBlock - fail-open behavior', () => {
   it('allows on invalid tool_input', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: {}, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: {}, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows when no paths extracted', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'echo hello' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'echo hello' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('uses defaults when ckignorePath missing', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'ls node_modules' }, options: { ckignorePath: '/nonexistent/.ckignore' } });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'ls node_modules' }, options: { ckignorePath: '/nonexistent/.ckignore' } });
     assert.ok(r.blocked, 'Should still block using DEFAULT_PATTERNS');
   });
 });
@@ -464,12 +464,12 @@ describe('checkScoutBlock - custom .ckignore', () => {
   };
 
   it('blocks "out" directory with custom config', () => {
-    const r = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: 'out/index.html' }, options: customOpts });
+    const r = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: 'out/index.html' }, options: customOpts });
     assert.ok(r.blocked);
   });
 
   it('blocks ".cache" with custom config', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'ls .cache' }, options: customOpts });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'ls .cache' }, options: customOpts });
     assert.ok(r.blocked);
   });
 });
@@ -481,20 +481,20 @@ describe('checkScoutBlock - negation .ckignore', () => {
   };
 
   it('blocks vendor but allows src/vendor', () => {
-    const blocked = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: 'vendor/pkg.go' }, options: negOpts });
+    const blocked = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: 'vendor/pkg.go' }, options: negOpts });
     assert.ok(blocked.blocked);
 
-    const allowed = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: 'src/vendor/lib.go' }, options: negOpts });
+    const allowed = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: 'src/vendor/lib.go' }, options: negOpts });
     assert.ok(!allowed.blocked);
   });
 
   // gitignore spec: cannot re-include inside excluded parent dir
   it('cannot negate dist/public (parent dir excluded — gitignore spec)', () => {
-    const r1 = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: 'dist/app.js' }, options: negOpts });
+    const r1 = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: 'dist/app.js' }, options: negOpts });
     assert.ok(r1.blocked);
 
     // dist/public is still blocked — gitignore limitation
-    const r2 = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: 'dist/public/index.html' }, options: negOpts });
+    const r2 = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: 'dist/public/index.html' }, options: negOpts });
     assert.ok(r2.blocked);
   });
 });
@@ -506,37 +506,37 @@ describe('checkScoutBlock - negation .ckignore', () => {
 
 describe('P0 - absolute and relative paths', () => {
   it('blocks absolute path to node_modules', () => {
-    const r = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: '/home/user/project/node_modules/pkg/index.js' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: '/home/user/project/node_modules/pkg/index.js' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('blocks absolute path to dist', () => {
-    const r = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: '/Users/kai/project/dist/bundle.js' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: '/Users/kai/project/dist/bundle.js' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('blocks ../ relative path to node_modules', () => {
-    const r = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: '../node_modules/pkg/file.js' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: '../node_modules/pkg/file.js' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('blocks ../../node_modules path', () => {
-    const r = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: '../../node_modules/pkg' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: '../../node_modules/pkg' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('allows absolute path to src', () => {
-    const r = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: '/home/user/project/src/index.ts' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: '/home/user/project/src/index.ts' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows ../ path to safe dir', () => {
-    const r = checkScoutBlock({ toolName: 'Read', toolInput: { file_path: '../src/utils.ts' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'view_file', toolInput: { file_path: '../src/utils.ts' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('blocks cat with absolute node_modules path', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'cat /home/user/project/node_modules/pkg/index.js' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'cat /home/user/project/node_modules/pkg/index.js' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 });
@@ -548,32 +548,32 @@ describe('P0 - absolute and relative paths', () => {
 
 describe('P1a - ENV prefix commands', () => {
   it('allows NODE_ENV=production npm run build', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'NODE_ENV=production npm run build' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'NODE_ENV=production npm run build' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows CI=true npm test', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'CI=true npm test' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'CI=true npm test' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows FORCE_COLOR=1 npx vitest', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'FORCE_COLOR=1 npx vitest' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'FORCE_COLOR=1 npx vitest' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows DEBUG=* npm run dev', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'DEBUG=* npm run dev' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'DEBUG=* npm run dev' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows multiple ENV vars before build', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'NODE_ENV=production CI=true npm run build' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'NODE_ENV=production CI=true npm run build' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows sudo npm install', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'sudo npm install' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'sudo npm install' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 });
@@ -586,13 +586,13 @@ describe('P1a - ENV prefix commands', () => {
 describe('P1b - heredoc protection', () => {
   it('does not block heredoc content mentioning node_modules', () => {
     const cmd = 'cat <<EOF\nnode_modules is large\nEOF';
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: cmd }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: cmd }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('does not block heredoc content mentioning build', () => {
     const cmd = 'cat <<EOF\nthe build output goes to dist\nEOF';
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: cmd }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: cmd }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 });
@@ -604,42 +604,42 @@ describe('P1b - heredoc protection', () => {
 
 describe('P1c - extended tool allowlist', () => {
   it('allows python manage.py build', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'python manage.py build' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'python manage.py build' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows python3 setup.py build', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'python3 setup.py build' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'python3 setup.py build' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows deno task build', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'deno task build' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'deno task build' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows bundle exec rake build', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'bundle exec rake build' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'bundle exec rake build' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows php artisan serve', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'php artisan serve' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'php artisan serve' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows mix deps.get (Elixir)', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'mix deps.get' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'mix deps.get' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows pip install package', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'pip install flask' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'pip install flask' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows uv pip install', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'uv pip install flask' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'uv pip install flask' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 });
@@ -651,22 +651,22 @@ describe('P1c - extended tool allowlist', () => {
 
 describe('P1 - shell executor unwrapping', () => {
   it('blocks bash -c "cat node_modules/file"', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'bash -c "cat node_modules/file"' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'bash -c "cat node_modules/file"' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('blocks sh -c "ls dist/"', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'sh -c "ls dist/"' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'sh -c "ls dist/"' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('blocks eval "cat node_modules/file"', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'eval "cat node_modules/file"' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'eval "cat node_modules/file"' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('allows bash -c "npm run build"', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'bash -c "npm run build"' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'bash -c "npm run build"' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 });
@@ -678,52 +678,52 @@ describe('P1 - shell executor unwrapping', () => {
 
 describe('P2 - context-aware extraction', () => {
   it('allows grep -r "build" src/', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'grep -r "build" src/' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'grep -r "build" src/' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows cat package.json | grep build', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'cat package.json | grep build' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'cat package.json | grep build' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows echo build', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'echo build' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'echo build' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows echo "deploying to build server"', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'echo "deploying to build server"' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'echo "deploying to build server"' }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('allows sed s/build/dist/g', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: "sed 's/build/dist/g' config.js" }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: "sed 's/build/dist/g' config.js" }, options: DEFAULT_OPTS });
     assert.ok(!r.blocked);
   });
 
   it('still blocks cat dist/file.js | head', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'cat dist/file.js | head -20' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'cat dist/file.js | head -20' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('still blocks ls node_modules', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'ls node_modules' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'ls node_modules' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('still blocks cd build', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'cd build' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'cd build' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('still blocks cp dist/file.js .', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'cp dist/file.js .' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'cp dist/file.js .' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 
   it('still blocks rm -rf node_modules', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'rm -rf node_modules' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'rm -rf node_modules' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 });
@@ -735,7 +735,7 @@ describe('P2 - context-aware extraction', () => {
 
 describe('P3 - metacharacter normalization', () => {
   it('blocks $() command substitution with node_modules', () => {
-    const r = checkScoutBlock({ toolName: 'Bash', toolInput: { command: 'echo $(cat node_modules/file)' }, options: DEFAULT_OPTS });
+    const r = checkScoutBlock({ toolName: 'run_command', toolInput: { command: 'echo $(cat node_modules/file)' }, options: DEFAULT_OPTS });
     assert.ok(r.blocked);
   });
 });

@@ -186,7 +186,7 @@ function checkScoutBlock({ toolName, toolInput, options = {} }) {
   }
 
   // Check for overly broad glob patterns (Glob tool)
-  if (checkBroadPatterns && (toolName === 'Glob' || toolInput.pattern)) {
+  if (checkBroadPatterns && (toolName === 'list_dir' || toolInput.pattern)) {
     const broadResult = detectBroadPatternIssue(toolInput);
     if (broadResult.blocked) {
       return {

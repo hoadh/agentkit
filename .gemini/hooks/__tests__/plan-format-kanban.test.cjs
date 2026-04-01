@@ -68,7 +68,7 @@ function runHook(inputJson) {
 /**
  * Build JSON payload simulating Gemini tool call
  */
-function makePayload({ toolName = 'Read', filePath = '', newString = '', content = '' } = {}) {
+function makePayload({ toolName = 'view_file', filePath = '', newString = '', content = '' } = {}) {
   return JSON.stringify({
     tool_name: toolName,
     tool_input: {
@@ -234,7 +234,7 @@ describe('plan-format-kanban.cjs', () => {
       const planFile = makePlanFile('edit-status', CLEAN_PLAN_CONTENT);
 
       const result = await runHook(makePayload({
-        toolName: 'Edit',
+        toolName: 'replace_file_content',
         filePath: planFile,
         newString: '| 1 | [Setup Environment](./phase-01-setup-environment.md) | Completed |'
       }));
@@ -251,7 +251,7 @@ describe('plan-format-kanban.cjs', () => {
       const planFile = makePlanFile('edit-inprogress', CLEAN_PLAN_CONTENT);
 
       const result = await runHook(makePayload({
-        toolName: 'Edit',
+        toolName: 'replace_file_content',
         filePath: planFile,
         newString: '| 2 | [Implement API](./phase-02-implement-api.md) | In Progress |'
       }));
@@ -282,7 +282,7 @@ status: in-progress
 `;
 
       const result = await runHook(makePayload({
-        toolName: 'Write',
+        toolName: 'write_to_file',
         filePath: planFile,
         content: writeContent
       }));
@@ -301,7 +301,7 @@ status: in-progress
 
       // Editing frontmatter (not a table row) with status word
       const result = await runHook(makePayload({
-        toolName: 'Edit',
+        toolName: 'replace_file_content',
         filePath: planFile,
         newString: 'status: in-progress'
       }));
@@ -319,7 +319,7 @@ status: in-progress
       const planFile = makePlanFile('prose-edit', CLEAN_PLAN_CONTENT);
 
       const result = await runHook(makePayload({
-        toolName: 'Edit',
+        toolName: 'replace_file_content',
         filePath: planFile,
         newString: 'This task is Pending review from the team.'
       }));
@@ -335,7 +335,7 @@ status: in-progress
       const planFile = makePlanFile('prose2-edit', CLEAN_PLAN_CONTENT);
 
       const result = await runHook(makePayload({
-        toolName: 'Edit',
+        toolName: 'replace_file_content',
         filePath: planFile,
         newString: '## Overview\n\nWork is Completed for the initial phase.'
       }));
@@ -355,7 +355,7 @@ status: in-progress
       const planFile = makePlanFile('cli-syntax', CLEAN_PLAN_CONTENT);
 
       const result = await runHook(makePayload({
-        toolName: 'Edit',
+        toolName: 'replace_file_content',
         filePath: planFile,
         newString: '| 1 | [Setup](./phase-01-setup-environment.md) | Completed |'
       }));

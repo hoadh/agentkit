@@ -52,7 +52,7 @@ process.stdin.on('end', () => {
     }
 
     // Check for direct status edits in phases table
-    if (toolName === 'Edit' || toolName === 'Write') {
+    if (toolName === 'replace_file_content' || toolName === 'write_to_file') {
       const toolOutput = data.tool_input?.new_string || data.tool_input?.content || '';
 
       // M6: Only detect status edits in actual table rows (lines starting with |)

@@ -37,20 +37,14 @@ gemini --version
 
 ## Configuration
 
-### Symlink Setup
+### Registration Setup
 
-Gemini CLI reads MCP servers from `.gemini/settings.json`. Create a symlink to `.gemini/.mcp.json`:
+Gemini CLI natively reads MCP servers from `.gemini/settings.json`. 
 
-```bash
-# Create .gemini directory
-mkdir -p .gemini
+> [!WARNING]
+> Do NOT use symlinks to map `.mcp.json` directly to `settings.json` inside Agentkit! This will overwrite the JavaScript event hooks (Privacy Block, Scout Block, Action Trackers) permanently disabling them.
 
-# Create symlink (Unix/Linux/macOS)
-ln -sf .gemini/.mcp.json .gemini/settings.json
-
-# Create symlink (Windows - requires admin or developer mode)
-mklink .gemini\settings.json .gemini\.mcp.json
-```
+Instead, configure MCP servers by manually pushing your `"mcpServers"` registry straight into the existing `settings.json` file without deleting the rest of the file layout.
 
 ### Security
 
@@ -184,17 +178,13 @@ Shows:
 - Available tools
 - Configuration errors
 
-### Verify Symlink
+### Verify Configuration
 
 ```bash
-# Unix/Linux/macOS
-ls -la .gemini/settings.json
-
-# Windows
-dir .gemini\settings.json
+cat .gemini/settings.json | grep -A 5 mcpServers
 ```
 
-Should show symlink pointing to `.gemini/.mcp.json`.
+Should properly return a valid JSON block containing your configured endpoints.
 
 ### Debug Mode
 

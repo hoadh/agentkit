@@ -200,7 +200,7 @@ describe('descriptive-name.cjs', () => {
       const context = parsed.hookSpecificOutput.additionalContext;
 
       assert.ok(
-        context.includes('Grep') || context.includes('Glob') || context.includes('Search'),
+        context.includes('grep_search') || context.includes('list_dir') || context.includes('Search'),
         'Should mention LLM tools (Grep, Glob, Search) for discoverability'
       );
     });

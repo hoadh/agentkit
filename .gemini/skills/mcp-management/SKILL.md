@@ -35,12 +35,8 @@ Use this skill when:
 
 ### 1. Configuration Management
 
-MCP servers configured in `.gemini/.mcp.json`.
-
-**Gemini CLI Integration** (recommended): Create symlink to `.gemini/settings.json`:
-```bash
-mkdir -p .gemini && ln -sf .gemini/.mcp.json .gemini/settings.json
-```
+**Gemini CLI Integration** (recommended): Merge the MCP servers into `.gemini/settings.json`:
+Copy the `"mcpServers"` block from your `.mcp.json` and cleanly append it into your existing `.gemini/settings.json` file. DO NOT overwrite or symlink over `settings.json`, as this will destroy the Agentkit hooks!
 
 See [references/configuration.md](references/configuration.md) and [references/gemini-cli-integration.md](references/gemini-cli-integration.md).
 
@@ -154,8 +150,8 @@ Command-line interface for MCP operations. Commands:
 
 **Method 1: Gemini CLI** (recommended)
 ```bash
-npm install -g gemini-cli
-mkdir -p .gemini && ln -sf .gemini/.mcp.json .gemini/settings.json
+mkdir -p .gemini
+# IMPORTANT: Merge your .mcp.json into your settings.json; DO NOT overwrite settings.json!
 # IMPORTANT: Use stdin piping, NOT -p flag (deprecated, skips MCP init)
 # GEMINI.md auto-loads to enforce JSON responses
 echo "Take a screenshot of https://example.com. Return JSON only per GEMINI.md instructions." | gemini -y -m <gemini.model>

@@ -60,7 +60,7 @@ let failed = 0;
 console.log('--- Test 1: Default patterns from .ckignore ---');
 let result = runTest(
   'node_modules blocked (default)',
-  { tool_name: 'Read', tool_input: { file_path: 'node_modules/pkg.json' } },
+  { tool_name: 'view_file', tool_input: { file_path: 'node_modules/pkg.json' } },
   'BLOCKED'
 );
 if (result.success) {
@@ -77,7 +77,7 @@ writeCkignore(['# Custom ignore', 'vendor']);
 
 result = runTest(
   'vendor blocked (custom)',
-  { tool_name: 'Read', tool_input: { file_path: 'vendor/lib.js' } },
+  { tool_name: 'view_file', tool_input: { file_path: 'vendor/lib.js' } },
   'BLOCKED'
 );
 if (result.success) {
@@ -90,7 +90,7 @@ if (result.success) {
 
 result = runTest(
   'node_modules ALLOWED when not in .ckignore',
-  { tool_name: 'Read', tool_input: { file_path: 'node_modules/pkg.json' } },
+  { tool_name: 'view_file', tool_input: { file_path: 'node_modules/pkg.json' } },
   'ALLOWED'
 );
 if (result.success) {
@@ -107,7 +107,7 @@ writeCkignore(['vendor', 'temp', '.cache']);
 
 result = runTest(
   'vendor blocked',
-  { tool_name: 'Grep', tool_input: { pattern: 'test', path: 'vendor' } },
+  { tool_name: 'grep_search', tool_input: { pattern: 'test', path: 'vendor' } },
   'BLOCKED'
 );
 if (result.success) {
@@ -120,7 +120,7 @@ if (result.success) {
 
 result = runTest(
   'temp blocked',
-  { tool_name: 'Bash', tool_input: { command: 'ls temp/' } },
+  { tool_name: 'run_command', tool_input: { command: 'ls temp/' } },
   'BLOCKED'
 );
 if (result.success) {
@@ -133,7 +133,7 @@ if (result.success) {
 
 result = runTest(
   '.cache blocked',
-  { tool_name: 'Glob', tool_input: { pattern: '.cache/**' } },
+  { tool_name: 'list_dir', tool_input: { pattern: '.cache/**' } },
   'BLOCKED'
 );
 if (result.success) {
@@ -146,7 +146,7 @@ if (result.success) {
 
 result = runTest(
   'src still allowed',
-  { tool_name: 'Read', tool_input: { file_path: 'src/index.js' } },
+  { tool_name: 'view_file', tool_input: { file_path: 'src/index.js' } },
   'ALLOWED'
 );
 if (result.success) {
@@ -163,7 +163,7 @@ writeCkignore(['# This is a comment', '', 'blockeddir', '# Another comment', '']
 
 result = runTest(
   'blockeddir blocked',
-  { tool_name: 'Read', tool_input: { file_path: 'blockeddir/file.txt' } },
+  { tool_name: 'view_file', tool_input: { file_path: 'blockeddir/file.txt' } },
   'BLOCKED'
 );
 if (result.success) {
@@ -176,7 +176,7 @@ if (result.success) {
 
 result = runTest(
   'otherdir allowed',
-  { tool_name: 'Read', tool_input: { file_path: 'otherdir/file.txt' } },
+  { tool_name: 'view_file', tool_input: { file_path: 'otherdir/file.txt' } },
   'ALLOWED'
 );
 if (result.success) {

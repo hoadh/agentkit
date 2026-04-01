@@ -11,7 +11,7 @@ try {
   }
 
   try {
-  const timer = createHookTimer('descriptive-name', { event: 'PreToolUse', tool: 'Write' });
+  const timer = createHookTimer('descriptive-name', { event: 'PreToolUse', tool: 'write_to_file' });
   let injectedPrompt = `## File naming guidance:
 - Skip this guidance if you are creating markdown or plain text files
 - Prefer kebab-case for JS/TS/Python/shell (.js, .ts, .py, .sh) with descriptive names
@@ -34,13 +34,13 @@ try {
   } catch (error) {
     // Fail-open for unexpected errors
     console.error('WARN: Hook error, allowing operation -', error.message);
-    logHookCrash('descriptive-name', error, { event: 'PreToolUse', tool: 'Write' });
+    logHookCrash('descriptive-name', error, { event: 'PreToolUse', tool: 'write_to_file' });
     process.exit(0);
   }
 } catch (e) {
   try {
     const { logHookCrash } = require('./lib/hook-logger.cjs');
-    logHookCrash('descriptive-name', e, { event: 'PreToolUse', tool: 'Write' });
+    logHookCrash('descriptive-name', e, { event: 'PreToolUse', tool: 'write_to_file' });
   } catch (_) {}
   process.exit(0); // fail-open
 }

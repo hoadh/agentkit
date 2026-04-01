@@ -27,7 +27,7 @@ const testCases = [
   {
     name: 'Write tool with file exceeding LOC threshold',
     input: {
-      tool_name: 'Write',
+      tool_name: 'write_to_file',
       tool_input: {
         file_path: testFilePath,
         content: longContent
@@ -38,7 +38,7 @@ const testCases = [
   {
     name: 'Edit tool with file exceeding LOC threshold',
     input: {
-      tool_name: 'Edit',
+      tool_name: 'replace_file_content',
       tool_input: {
         file_path: testFilePath,
         old_string: '// Test line',
@@ -50,7 +50,7 @@ const testCases = [
   {
     name: 'Write tool with short file (under threshold)',
     input: {
-      tool_name: 'Write',
+      tool_name: 'write_to_file',
       tool_input: {
         file_path: shortFilePath,
         content: shortContent
@@ -61,7 +61,7 @@ const testCases = [
   {
     name: 'Write tool with non-existent file',
     input: {
-      tool_name: 'Write',
+      tool_name: 'write_to_file',
       tool_input: {
         file_path: '/tmp/non-existent-file.js',
         content: 'test'

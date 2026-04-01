@@ -299,7 +299,7 @@ const sampleTranscriptData = [
         {
           type: 'tool_use',
           id: 'tool-1',
-          name: 'Read',
+          name: 'view_file',
           input: { file_path: '/home/user/file.txt' }
         }
       ]
@@ -324,7 +324,7 @@ const sampleTranscriptData = [
         {
           type: 'tool_use',
           id: 'tool-2',
-          name: 'Bash',
+          name: 'run_command',
           input: { command: 'git status' }
         }
       ]
@@ -388,8 +388,8 @@ test('parseTranscript tracks tools correctly', async () => {
   const result = await parseTranscript(tmpTranscript);
   assertTrue(result.tools.length >= 2, 'Should track at least 2 tools');
   const toolNames = result.tools.map(t => t.name);
-  assertContains(toolNames.join(','), 'Read', 'Should contain Read tool');
-  assertContains(toolNames.join(','), 'Bash', 'Should contain Bash tool');
+  assertContains(toolNames.join(','), 'view_file', 'Should contain Read tool');
+  assertContains(toolNames.join(','), 'run_command', 'Should contain Bash tool');
 });
 
 test('parseTranscript marks tool status correctly', async () => {
@@ -415,7 +415,7 @@ test('parseTranscript tracks todos correctly', async () => {
 
 test('parseTranscript extracts targets from tools', async () => {
   const result = await parseTranscript(tmpTranscript);
-  const readTool = result.tools.find(t => t.name === 'Read');
+  const readTool = result.tools.find(t => t.name === 'view_file');
   if (readTool) {
     assertTrue(readTool.target, 'Read tool should have target');
     assertContains(readTool.target, 'file.txt', 'Should contain file path');
@@ -431,38 +431,38 @@ console.log('TEST 7: Extract Target Function');
 console.log('═══════════════════════════════════════════════════════\n');
 
 test('extractTarget: Read tool', () => {
-  const target = extractTarget('Read', { file_path: '/home/user/file.txt' });
+  const target = extractTarget('view_file', { file_path: '/home/user/file.txt' });
   assertEquals(target, '/home/user/file.txt', 'Should extract file_path');
 });
 
 test('extractTarget: Write tool', () => {
-  const target = extractTarget('Write', { file_path: '/home/user/output.txt' });
+  const target = extractTarget('write_to_file', { file_path: '/home/user/output.txt' });
   assertEquals(target, '/home/user/output.txt', 'Should extract file_path from Write');
 });
 
 test('extractTarget: Edit tool', () => {
-  const target = extractTarget('Edit', { path: '/home/user/config.json' });
+  const target = extractTarget('replace_file_content', { path: '/home/user/config.json' });
   assertEquals(target, '/home/user/config.json', 'Should extract path from Edit');
 });
 
 test('extractTarget: Glob tool', () => {
-  const target = extractTarget('Glob', { pattern: '**/*.js' });
+  const target = extractTarget('list_dir', { pattern: '**/*.js' });
   assertEquals(target, '**/*.js', 'Should extract pattern from Glob');
 });
 
 test('extractTarget: Grep tool', () => {
-  const target = extractTarget('Grep', { pattern: 'function.*test' });
+  const target = extractTarget('grep_search', { pattern: 'function.*test' });
   assertEquals(target, 'function.*test', 'Should extract pattern from Grep');
 });
 
 test('extractTarget: Bash tool (short command)', () => {
-  const target = extractTarget('Bash', { command: 'ls -la' });
+  const target = extractTarget('run_command', { command: 'ls -la' });
   assertEquals(target, 'ls -la', 'Should extract short command');
 });
 
 test('extractTarget: Bash tool (long command truncated)', () => {
   const longCmd = 'npm install --save-dev @types/node @types/jest @types/react @types/react-dom @types/webpack';
-  const target = extractTarget('Bash', { command: longCmd });
+  const target = extractTarget('run_command', { command: longCmd });
   assertTrue(target.endsWith('...'), 'Should truncate long command with ...');
   assertTrue(target.length <= 33, 'Should be max 30 chars + ...');
 });
@@ -473,7 +473,7 @@ test('extractTarget: Unknown tool returns null', () => {
 });
 
 test('extractTarget: Null input returns null', () => {
-  const target = extractTarget('Read', null);
+  const target = extractTarget('view_file', null);
   assertEquals(target, null, 'Should return null for null input');
 });
 
@@ -571,7 +571,7 @@ test('processEntry handles entry without timestamp', () => {
         {
           type: 'tool_use',
           id: 'tool-1',
-          name: 'Bash',
+          name: 'run_command',
           input: { command: 'ls' }
         }
       ]
@@ -841,7 +841,7 @@ test('parseTranscript processes 100 entries <100ms', async () => {
           {
             type: 'tool_use',
             id: `tool-${i}`,
-            name: 'Bash',
+            name: 'run_command',
             input: { command: 'echo test' }
           }
         ]

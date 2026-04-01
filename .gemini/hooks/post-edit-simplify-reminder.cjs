@@ -91,7 +91,7 @@ function main() {
     const toolInput = hookData.tool_input || {};
 
     // Only track edit operations
-    const editTools = ['Edit', 'Write', 'MultiEdit'];
+    const editTools = ['replace_file_content', 'write_to_file', 'multi_replace_file_content'];
     if (!editTools.includes(toolName)) {
       timer.end({ tool: toolName, status: 'skip', exit: 0, note: 'non-edit-tool' });
       console.log(JSON.stringify({ continue: true }));

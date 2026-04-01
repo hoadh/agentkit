@@ -38,7 +38,7 @@ describe('hook-logger', () => {
   it('writes structured hook fields', () => {
     logHook('privacy-block', {
       event: 'PreToolUse',
-      tool: 'Grep',
+      tool: 'grep_search',
       target: '.env',
       note: 'approval-required',
       status: 'block',
@@ -48,7 +48,7 @@ describe('hook-logger', () => {
     const [entry] = readEntries();
     assert.strictEqual(entry.hook, 'privacy-block');
     assert.strictEqual(entry.event, 'PreToolUse');
-    assert.strictEqual(entry.tool, 'Grep');
+    assert.strictEqual(entry.tool, 'grep_search');
     assert.strictEqual(entry.target, '.env');
     assert.strictEqual(entry.note, 'approval-required');
     assert.strictEqual(entry.status, 'block');
@@ -58,7 +58,7 @@ describe('hook-logger', () => {
   it('merges base timer fields into the final entry', async () => {
     const timer = createHookTimer('usage-context-awareness', {
       event: 'PostToolUse',
-      tool: 'Grep'
+      tool: 'grep_search'
     });
 
     await new Promise(resolve => setTimeout(resolve, 5));
@@ -67,19 +67,19 @@ describe('hook-logger', () => {
     const [entry] = readEntries();
     assert.strictEqual(entry.hook, 'usage-context-awareness');
     assert.strictEqual(entry.event, 'PostToolUse');
-    assert.strictEqual(entry.tool, 'Grep');
+    assert.strictEqual(entry.tool, 'grep_search');
     assert.strictEqual(entry.status, 'skip');
     assert.strictEqual(entry.note, 'throttled');
     assert.ok(entry.dur >= 0);
   });
 
   it('normalizes crash logging', () => {
-    logHookCrash('scout-block', new Error('boom'), { event: 'PreToolUse', tool: 'Read' });
+    logHookCrash('scout-block', new Error('boom'), { event: 'PreToolUse', tool: 'view_file' });
 
     const [entry] = readEntries();
     assert.strictEqual(entry.hook, 'scout-block');
     assert.strictEqual(entry.event, 'PreToolUse');
-    assert.strictEqual(entry.tool, 'Read');
+    assert.strictEqual(entry.tool, 'view_file');
     assert.strictEqual(entry.status, 'crash');
     assert.strictEqual(entry.error, 'boom');
   });
