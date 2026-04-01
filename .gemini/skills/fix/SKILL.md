@@ -1,5 +1,5 @@
 ---
-name: ck:fix
+name: gk-fix
 description: "ALWAYS activate this skill before fixing ANY bug, error, test failure, CI/CD issue, type error, lint, log error, UI issue, code problem."
 argument-hint: "[issue] --auto|--review|--quick|--parallel"
 metadata:

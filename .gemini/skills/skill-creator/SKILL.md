@@ -1,5 +1,5 @@
 ---
-name: ck:skill-creator
+name: gk-skill-creator
 description: Create or update Gemini skills with eval-driven iteration. Use for new skills, skill scripts, references, benchmark optimization, description optimization, eval testing, extending Gemini's capabilities.
 license: Complete terms in LICENSE.txt
 argument-hint: "[skill-name or description]"

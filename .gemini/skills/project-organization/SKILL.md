@@ -1,5 +1,5 @@
 ---
-name: ck:project-organization
+name: gk-project-organization
 description: Organize files, directories, and content structure in any project. Use when creating files, determining output paths, organizing existing assets, or standardizing project layout.
 argument-hint: "[directories or files to organize]"
 metadata:

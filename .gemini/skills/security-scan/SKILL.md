@@ -1,5 +1,5 @@
 ---
-name: ck:security-scan
+name: gk-security-scan
 description: "Scan codebase for security vulnerabilities, hardcoded secrets, dependency issues, and OWASP patterns. Use when asked to 'security scan', 'check for secrets', 'audit security', or before major releases."
 argument-hint: "[scope] [--secrets-only] [--deps-only] [--full]"
 metadata:

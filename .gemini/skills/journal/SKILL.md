@@ -1,5 +1,5 @@
 ---
-name: ck:journal
+name: gk-journal
 description: "Write journal entries analyzing recent changes and session reflections."
 argument-hint: "[topic or reflection]"
 metadata:

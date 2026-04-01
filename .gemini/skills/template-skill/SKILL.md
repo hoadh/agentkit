@@ -1,5 +1,5 @@
 ---
-name: ck:template-skill
+name: gk-template-skill
 description: Replace with description of the skill and when Gemini should use it.
 metadata:
   author: geminikit
