@@ -187,11 +187,11 @@ if [ "$scope_choice" == "1" ]; then
     grep -rl --include="*.md" --include="*.cjs" --include="*.js" --include="*.py" \
         --include="*.sh" --include="*.toml" --include="*.json" \
         -E '(node|python3) \.gemini/' "$TARGET_BASE" 2>/dev/null | while IFS= read -r file; do
-        sed -i '' \
+        sed \
             -e 's|node \.gemini/|node ~/.gemini/|g' \
             -e 's|python3 \.gemini/|python3 ~/.gemini/|g' \
             -e 's|python \.gemini/|python ~/.gemini/|g' \
-            "$file"
+            "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
     done
     echo -e "${GREEN}  exec paths rewritten (.gemini/ -> ~/.gemini/)${NC}"
 
