@@ -140,7 +140,7 @@ function isAllowedCommand(command) {
  * @param {Object} params.toolInput - Tool input with file_path, path, pattern, command
  * @param {Object} [params.options]
  * @param {string} [params.options.ckignorePath] - Path to .ckignore file
- * @param {string} [params.options.claudeDir] - Path to .gemini or .opencode directory
+ * @param {string} [params.options.geminiDir] - Path to .gemini or .opencode directory
  * @param {boolean} [params.options.checkBroadPatterns] - Check for overly broad glob patterns (default: true)
  * @returns {{
  *   blocked: boolean,
@@ -155,7 +155,7 @@ function isAllowedCommand(command) {
 function checkScoutBlock({ toolName, toolInput, options = {} }) {
   const {
     ckignorePath,
-    claudeDir = path.join(process.cwd(), '.gemini'),
+    geminiDir = path.join(process.cwd(), '.gemini'),
     checkBroadPatterns = true
   } = options;
 
@@ -200,7 +200,7 @@ function checkScoutBlock({ toolName, toolInput, options = {} }) {
   }
 
   // Resolve .ckignore path
-  const resolvedCkignorePath = ckignorePath || path.join(claudeDir, '.ckignore');
+  const resolvedCkignorePath = ckignorePath || path.join(geminiDir, '.ckignore');
 
   // Load patterns and create matcher
   const patterns = loadPatterns(resolvedCkignorePath);

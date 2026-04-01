@@ -48,7 +48,7 @@ import {fade} from '@remotion/transitions/fade';
 import {slide} from '@remotion/transitions/slide';
 import {wipe} from '@remotion/transitions/wipe';
 import {flip} from '@remotion/transitions/flip';
-import {clockWipe} from '@remotion/transitions/clock-wipe';
+import {clockWipe} from '@remotion/transitions/clogk-wipe';
 ```
 
 ## Slide Transition with Direction

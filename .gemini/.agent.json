@@ -1,6 +1,8 @@
 {
-  "$schema": "./schemas/agent-config.schema.json",
+  "$schema": "./schemas/gk-config.schema.json",
   "codingLevel": -1,
+  "statusline": "full",
+  "statuslineColors": true,
   "privacyBlock": true,
   "docs": {
     "maxLoc": 800
@@ -54,5 +56,6 @@
       "useGemini": true
     }
   },
+  "hooks": {},
   "assertions": []
 }

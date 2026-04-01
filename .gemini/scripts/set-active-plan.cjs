@@ -8,14 +8,14 @@
  * allowing subagents to receive the latest plan context via SubagentStart hook.
  *
  * The session temp file (/tmp/gk-session-{id}.json) is the source of truth
- * for plan context within a session. Env vars ($GK_ACTIVE_PLAN) are just
+ * for plan context within a session. Env vars ($CK_ACTIVE_PLAN) are just
  * the initial snapshot from session start.
  */
 
 const path = require('path');
 const { writeSessionState, readSessionState } = require('../hooks/lib/gk-config-utils.cjs');
 
-const sessionId = process.env.GK_SESSION_ID;
+const sessionId = process.env.CK_SESSION_ID;
 const newPlan = process.argv[2];
 
 if (!newPlan) {
@@ -30,7 +30,7 @@ if (!newPlan) {
 const absolutePlan = path.resolve(newPlan);
 
 if (!sessionId) {
-  console.warn('Warning: GK_SESSION_ID not set - session state will not persist');
+  console.warn('Warning: CK_SESSION_ID not set - session state will not persist');
   console.log(`Would set active plan to: ${absolutePlan}`);
   process.exit(0);
 }

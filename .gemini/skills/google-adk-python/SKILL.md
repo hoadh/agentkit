@@ -1,8 +1,11 @@
 ---
-name: google-adk-python
+name: ck:google-adk-python
 description: "Build AI agents with Google ADK Python. Multi-agent systems, A2A protocol, MCP tools, workflow agents, state/memory, callbacks/plugins, Vertex AI deployment, evaluation."
 license: Apache-2.0
-version: 2.0.0
+argument-hint: "[agent or feature]"
+metadata:
+  author: geminikit
+  version: "2.0.0"
 ---
 
 # Google ADK Python Skill
@@ -98,9 +101,9 @@ Use `App` when needing plugins, event compaction, or custom lifecycle management
 
 ## Model Support
 
-Latest: `gemini-2.5-flash` (default), `gemini-2.5-pro`
-Preview: `gemini-3-flash-preview`, `gemini-3.1-pro-preview`
-Also: Claude, Gemini, Ollama, LiteLLM, vLLM, Model Garden
+Latest: `gemini-2.5-flash` (default), `gemini-2.5-pro`, `gemini-2.0-flash` (sunsets Mar 2026)
+Preview: `gemini-3-flash-preview`, `gemini-3-pro-preview`
+Also: Google Gemini, Ollama, LiteLLM, vLLM, Model Garden
 
 ## Best Practices
 

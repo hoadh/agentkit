@@ -60,7 +60,7 @@ One powerful abstraction > ten clever hacks.
 Signs you're missing a cascade:
 - "Just need to add one more case..." (repeating forever)
 - "These are similar but different" (maybe they're the same?)
-- Refactoring feels like whack-a-mole (fix one, break another)
+- Refactoring feels like whagk-a-mole (fix one, break another)
 - Growing configuration file
 - "Don't touch that, it's complicated" (complexity hiding pattern)
 

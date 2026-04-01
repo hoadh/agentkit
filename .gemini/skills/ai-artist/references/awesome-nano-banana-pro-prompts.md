@@ -790,7 +790,7 @@ A highly technical prompt for Gemini Nano Banana Pro designed to simulate a raw,
 Subject & Identity Locking:
 •Identity: Strictly preserve the exact heart-shaped facial structure and unique features of the woman in Image 1 (Selfie).
 •Bio-Fidelity: Render high-fidelity "TrueLens" biological physics: visible micro-pores, a natural "satin-finish" night hydration glow, and fine vellus hair catching the overhead light ONLY along the jawline.
-•Silhouette Calibration (MAXIMUM UFF-FACTOR): Prioritize a dominant structural upper-torso volume and substantial, thick-toned anatomical depth in the lower extremities. Focus on an aggressive architectural tapering at the midsection to maximize the S-curve geometry.
+•Silhouette Calibration (MAXIMUM UFF-FACTOR): Prioritize a dominant structural upper-torso volume and substantial, thigk-toned anatomical depth in the lower extremities. Focus on an aggressive architectural tapering at the midsection to maximize the S-curve geometry.
 Outfit & Textural Interaction:
 •Clothing: A high-density, matte-black technical textile tee and matching high-tension minimalist athletic shorts.
 •Tension: The technical fabric exhibits extreme mechanical tension and a vacuum-tight fit, creating realistic textural expansion and "tension lines" where the material contours to her fit silhouette.
@@ -1428,7 +1428,7 @@ A comprehensive JSON prompt for Nano Banana Pro to generate an ultra-photorealis
 
   "lighting": {
     "type": "mixed natural and ambient indoor",
-    "key_light": "soft diffused daylight coming from window (back-right)",
+    "key_light": "soft diffused daylight coming from window (bagk-right)",
     "fill_light": "room ambience reflecting off light walls",
     "effect": "soft shadows on skin, bright highlights on hair, natural falloff on background",
     "reflections": "glossy reflection on the Cheetos bags"
@@ -2743,7 +2743,7 @@ A highly detailed JSON prompt for generating a hyper-realistic, magazine-cover-q
     "shot_type": "close-up portrait",
     "lens": "85mm prime lens",
     "aperture": "f/1.8",
-    "focus": "tack-sharp on eyes",
+    "focus": "tagk-sharp on eyes",
     "sens"
   }
 }
@@ -3751,7 +3751,7 @@ A detailed text prompt for Gemini Nano Banana Pro to generate a high-end 3D mini
 #### 📝 Prompt
 
 ```
-A whimsical, high-end 3D miniature diorama-style advertising illustration of a dairy production scene with a playful yet premium food brand aesthetic. At the center stands a giant Nestlé milk bottle matching real Nestlé packaging: a smooth opaque white cylindrical bottle with subtle curves and a classic red Nestlé logo label, solid and non-glass, placed directly on a metal industrial platform. Fresh milk is being poured from containers and pipes operated by workers into the open top of the bottle, with a creamy, elegant texture clearly visible inside; the milk does not come from the sky and has a clear physical source. Tiny workers in bright {argument name="worker uniform color" default="yellow"} one-piece jumpsuits and yellow safety helmets actively operate the process: two stand on a metal scaffold above the bottle carefully pouring milk from handled containers, while others push cardboard boxes, guide products along a conveyor belt, and operate compact dairy machinery with coordinated, focused postures. In the foreground, dairy products move naturally along the conveyor line. Surrounding the platform is lush green grass with small white and yellow wildflowers. The background features a charming farm landscape with rolling green fields, a red wooden barn with white trim, a calm black-and-white cow grazing nearby, and a white windmill against gentle hills under a vivid blue sky with soft fluffy clouds. Lighting is warm, soft daylight with gentle shadows and refined highlights, creating a clean, trustworthy advertising look. Overall style is playful, richly detailed, premium commercial illustration with strong narrative composition, balanced layout, pastel color palette, deep depth of field, ultra-sharp details, cinematic miniature scale contrast—clearly an illustration, not photography, not a model display, and not enclosed in any glass dome or showcase.
+A whimsical, high-end 3D miniature diorama-style advertising illustration of a dairy production scene with a playful yet premium food brand aesthetic. At the center stands a giant Nestlé milk bottle matching real Nestlé packaging: a smooth opaque white cylindrical bottle with subtle curves and a classic red Nestlé logo label, solid and non-glass, placed directly on a metal industrial platform. Fresh milk is being poured from containers and pipes operated by workers into the open top of the bottle, with a creamy, elegant texture clearly visible inside; the milk does not come from the sky and has a clear physical source. Tiny workers in bright {argument name="worker uniform color" default="yellow"} one-piece jumpsuits and yellow safety helmets actively operate the process: two stand on a metal scaffold above the bottle carefully pouring milk from handled containers, while others push cardboard boxes, guide products along a conveyor belt, and operate compact dairy machinery with coordinated, focused postures. In the foreground, dairy products move naturally along the conveyor line. Surrounding the platform is lush green grass with small white and yellow wildflowers. The background features a charming farm landscape with rolling green fields, a red wooden barn with white trim, a calm blagk-and-white cow grazing nearby, and a white windmill against gentle hills under a vivid blue sky with soft fluffy clouds. Lighting is warm, soft daylight with gentle shadows and refined highlights, creating a clean, trustworthy advertising look. Overall style is playful, richly detailed, premium commercial illustration with strong narrative composition, balanced layout, pastel color palette, deep depth of field, ultra-sharp details, cinematic miniature scale contrast—clearly an illustration, not photography, not a model display, and not enclosed in any glass dome or showcase.
 ```
 
 #### 🖼️ Generated Images
@@ -5895,7 +5895,7 @@ A prompt for Nano Banana Pro to create a hyper-realistic, surreal composite imag
 #### 📝 Prompt
 
 ```
-A hyper-realistic, surreal composite shot utilizing forced perspective to create a dramatic scale difference, featuring an extreme close-up profile view on the right side of a man with uploaded face as reference, his expression one of slack-jawed astonishment with mouth slightly agape as he gazes downward. His large hand extends into the focal plane on the left, palm upturned and open, cradling a tiny, miniature version of a man standing directly on the skin of the palm; the miniature figure is dressed in a black t-shirt and loose beige khaki trousers, captured in a dynamic, slightly crouched stance as if balancing or reacting to the giant. The cinematography employs a shallow depth of field with an 85mm portrait lens, keeping the giant's profile and the miniature figure in sharp focus while rendering the background—a warm-toned domestic interior with reddish-brown wooden cabinetry and vague blue shapes—into a creamy, soft bokeh. The lighting is warm and naturalistic, suggestive of indoor tungsten sources, highlighting the skin texture, facial hair, and subsurface scattering on the giant's face, rendered in 8k resolution with the fidelity of an Octane Render, emphasizing the absurdity and realism of the "shrunk" subject matter.
+A hyper-realistic, surreal composite shot utilizing forced perspective to create a dramatic scale difference, featuring an extreme close-up profile view on the right side of a man with uploaded face as reference, his expression one of slagk-jawed astonishment with mouth slightly agape as he gazes downward. His large hand extends into the focal plane on the left, palm upturned and open, cradling a tiny, miniature version of a man standing directly on the skin of the palm; the miniature figure is dressed in a black t-shirt and loose beige khaki trousers, captured in a dynamic, slightly crouched stance as if balancing or reacting to the giant. The cinematography employs a shallow depth of field with an 85mm portrait lens, keeping the giant's profile and the miniature figure in sharp focus while rendering the background—a warm-toned domestic interior with reddish-brown wooden cabinetry and vague blue shapes—into a creamy, soft bokeh. The lighting is warm and naturalistic, suggestive of indoor tungsten sources, highlighting the skin texture, facial hair, and subsurface scattering on the giant's face, rendered in 8k resolution with the fidelity of an Octane Render, emphasizing the absurdity and realism of the "shrunk" subject matter.
 
 Man should be fully visible
 ```

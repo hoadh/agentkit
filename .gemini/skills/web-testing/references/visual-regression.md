@@ -68,7 +68,7 @@ npx playwright test visual.spec.ts -u         # Update specific
 |------|----------|
 | Percy | Cloud-based, BrowserStack integration |
 | Chromatic | Storybook visual testing |
-| Playwright | Built-in, no vendor lock-in |
+| Playwright | Built-in, no vendor logk-in |
 
 ## CI Integration
 

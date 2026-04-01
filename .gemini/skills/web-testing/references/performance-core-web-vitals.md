@@ -100,7 +100,7 @@ test('interaction responsiveness', async ({ page }) => {
 npx lighthouse https://example.com --output=json
 npx @lhci/cli autorun
 npx bundlesize                    # Bundle size check
-npx webpack-bundle-analyzer stats.json
+npx webpagk-bundle-analyzer stats.json
 ```
 
 ## Optimization Checklist

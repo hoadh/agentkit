@@ -149,10 +149,10 @@ if [ "$scope_choice" == "1" ]; then
 
     # Collect existing content for backup
     backup_sources=()
-    for dir in skills agents commands hooks scripts schemas output-styles rules; do
+    for dir in skills agents hooks scripts schemas output-styles rules; do
         [ -d "$TARGET_BASE/$dir" ] && backup_sources+=("$TARGET_BASE/$dir")
     done
-    for file in GEMINI.md .agent.json settings.json; do
+    for file in GEMINI.md .agent.json settings.json metadata.json .geminiignore; do
         [ -f "$TARGET_BASE/$file" ] && backup_sources+=("$TARGET_BASE/$file")
     done
 
@@ -167,7 +167,6 @@ if [ "$scope_choice" == "1" ]; then
     echo "Syncing artifacts..."
     safe_sync_dir "$REPO_GEMINI/skills"        "$TARGET_BASE/skills"        "skills"
     safe_sync_dir "$REPO_GEMINI/agents"        "$TARGET_BASE/agents"        "agents"
-    safe_sync_dir "$REPO_GEMINI/commands"      "$TARGET_BASE/commands"      "commands"
     safe_sync_dir "$REPO_GEMINI/hooks"         "$TARGET_BASE/hooks"         "hooks"
     safe_sync_dir "$REPO_GEMINI/scripts"       "$TARGET_BASE/scripts"       "scripts"
     safe_sync_dir "$REPO_GEMINI/schemas"       "$TARGET_BASE/schemas"       "schemas"
@@ -177,6 +176,8 @@ if [ "$scope_choice" == "1" ]; then
     # Sync individual config files
     safe_sync_file "$REPO_GEMINI/.agent.json"   "$TARGET_BASE/.agent.json"   ".agent.json"
     safe_sync_file "$REPO_GEMINI/settings.json" "$TARGET_BASE/settings.json" "settings.json"
+    safe_sync_file "$REPO_GEMINI/metadata.json" "$TARGET_BASE/metadata.json" "metadata.json"
+    safe_sync_file "$REPO_GEMINI/.geminiignore" "$TARGET_BASE/.geminiignore" ".geminiignore"
 
     # Sync GEMINI.md (lives at repo root, installs to ~/.gemini/)
     safe_sync_file "$REPO_ROOT/GEMINI.md" "$TARGET_BASE/GEMINI.md" "GEMINI.md"
@@ -225,6 +226,12 @@ elif [ "$scope_choice" == "2" ]; then
     fi
 
     ABS_TARGET_DIR=$(cd "$target_dir" && pwd)
+    # Upgrade legacy .claude directory if present
+    if [ -d "$ABS_TARGET_DIR/.claude" ] && [ ! -d "$ABS_TARGET_DIR/.gemini" ]; then
+        echo -e "${YELLOW}Detected legacy .claude directory. Renaming to .gemini...${NC}"
+        mv "$ABS_TARGET_DIR/.claude" "$ABS_TARGET_DIR/.gemini"
+    fi
+
     TARGET_BASE="$ABS_TARGET_DIR/.gemini"
     BACKUP_BASE="$ABS_TARGET_DIR/.gemini-backups"
     mkdir -p "$TARGET_BASE"
@@ -232,10 +239,10 @@ elif [ "$scope_choice" == "2" ]; then
 
     # Collect existing content for backup
     backup_sources=()
-    for dir in skills agents commands hooks scripts schemas output-styles rules; do
+    for dir in skills agents hooks scripts schemas output-styles rules; do
         [ -d "$TARGET_BASE/$dir" ] && backup_sources+=("$TARGET_BASE/$dir")
     done
-    for file in .agent.json settings.json; do
+    for file in .agent.json settings.json metadata.json .geminiignore; do
         [ -f "$TARGET_BASE/$file" ] && backup_sources+=("$TARGET_BASE/$file")
     done
     [ -f "$ABS_TARGET_DIR/GEMINI.md" ] && backup_sources+=("$ABS_TARGET_DIR/GEMINI.md")
@@ -251,7 +258,6 @@ elif [ "$scope_choice" == "2" ]; then
     echo "Syncing artifacts..."
     safe_sync_dir "$REPO_GEMINI/skills"        "$TARGET_BASE/skills"        "skills"
     safe_sync_dir "$REPO_GEMINI/agents"        "$TARGET_BASE/agents"        "agents"
-    safe_sync_dir "$REPO_GEMINI/commands"      "$TARGET_BASE/commands"      "commands"
     safe_sync_dir "$REPO_GEMINI/hooks"         "$TARGET_BASE/hooks"         "hooks"
     safe_sync_dir "$REPO_GEMINI/scripts"       "$TARGET_BASE/scripts"       "scripts"
     safe_sync_dir "$REPO_GEMINI/schemas"       "$TARGET_BASE/schemas"       "schemas"

@@ -1,19 +1,25 @@
 ---
-name: markdown-novel-viewer
+name: ck:markdown-novel-viewer
 description: View markdown files with calm, book-like reading experience via HTTP server. Use for long-form content, documentation preview, novel reading, report viewing, distraction-free reading.
+argument-hint: "[file-or-directory]"
+metadata:
+  author: geminikit
+  version: "1.0.0"
 ---
 
 # markdown-novel-viewer
 
 Background HTTP server rendering markdown files with calm, book-like reading experience.
 
+**Note:** HTML generation mode (`skill:preview --html ...`) produces self-contained HTML files that open directly in the browser — they do not use this server.
+
 ## ⚠️ Installation Required
 
 **This skill requires npm dependencies.** Run one of the following:
 
 ```bash
-# Option 1: Install via AgentKit CLI (recommended)
-./setup.sh  # Runs setup.sh which handles all skills
+# Option 1: Install via GeminiKit CLI (recommended)
+ck init  # Runs install.sh which handles all skills
 
 # Option 2: Manual installation
 cd .gemini/skills/markdown-novel-viewer
@@ -53,14 +59,14 @@ node .gemini/skills/markdown-novel-viewer/scripts/server.cjs \
 node .gemini/skills/markdown-novel-viewer/scripts/server.cjs --stop
 ```
 
-## Slash Command
+## Skill Invocation
 
-Use `/preview` for quick access:
+Use `skill:preview` for quick access:
 
 ```bash
-/preview plans/my-plan/plan.md    # View markdown file
-/preview plans/                   # Browse directory
-/preview --stop                   # Stop server
+skill:preview plans/my-plan/plan.md    # View markdown file
+skill:preview plans/                   # Browse directory
+skill:preview --stop                   # Stop server
 ```
 
 ## Features
@@ -200,7 +206,7 @@ To access from another device on your network:
 
 ```bash
 # Start with 0.0.0.0 to bind to all interfaces
-node server.cjs --file ./README.md --host 0.0.0.0 --port 3456
+node .gemini/skills/markdown-novel-viewer/scripts/server.cjs --file ./README.md --host 0.0.0.0 --port 3456
 ```
 
 When using `--host 0.0.0.0`, the server auto-detects your local network IP and includes it in the output:

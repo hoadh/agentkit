@@ -176,7 +176,7 @@ Scripts are **optional tooling** - the methodology can be applied without them.
 
 Converted from: https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking
 
-Original MCP server by Anthropic (MIT License).
+Original MCP server by Google (MIT License).
 Skill conversion:
 - Extracts methodology as instructions
 - Adds executable scripts for deterministic validation

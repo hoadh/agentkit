@@ -1,54 +1,155 @@
 #!/usr/bin/env node
 /**
- * Gemini CLI Adapter: BeforeTool → scout-block
+ * scout-block.cjs - Cross-platform hook for blocking directory access
  *
- * Blocks access to directories in .gemini/.ckignore.
- * Normalizes Gemini tool names to Gemini format for shared lib.
+ * Blocks access to directories listed in .gemini/.ckignore
+ * Uses gitignore-spec compliant pattern matching via 'ignore' package
  *
- * Event: BeforeTool | Matcher: write_file|replace|read_file|shell|glob|grep
+ * Blocking Rules:
+ * - File paths: Blocks any file_path/path/pattern containing blocked directories
+ * - Bash commands: Blocks directory access (cd, ls, cat, etc.) but ALLOWS build commands
+ *   - Blocked: cd node_modules, ls packages/web/node_modules, cat dist/file.js
+ *   - Allowed: npm build, go build, cargo build, make, mvn, gradle, docker build, kubectl, terraform
+ *
+ * Configuration:
+ * - Edit .gemini/.ckignore to customize blocked patterns (one per line, # for comments)
+ * - Supports negation patterns (!) to allow specific paths
+ *
+ * Exit Codes:
+ * - 0: Command allowed
+ * - 2: Command blocked
+ *
+ * Core logic extracted to lib/scout-checker.cjs for OpenCode plugin reuse.
  */
 
-const { runAdapter, normalizeToolName, formatBlock, bridgeGeminiEnvVars } = require('./lib/cli-adapter.cjs');
-const { isHookEnabled } = require('./lib/gk-config-utils.cjs');
-
-runAdapter('scout-block', async () => {
-  if (!isHookEnabled('scout-block')) process.exit(0);
-
+// Crash wrapper — catches require() failures and logs them
+try {
   const fs = require('fs');
   const path = require('path');
-  const { checkScoutBlock } = require('./lib/scout-checker.cjs');
 
-  bridgeGeminiEnvVars();
+  // Import shared scout checking logic
+  const {
+    checkScoutBlock,
+    isBuildCommand,
+    isVenvExecutable,
+    isAllowedCommand
+  } = require('./lib/scout-checker.cjs');
+  const { isHookEnabled } = require('./lib/gk-config-utils.cjs');
 
-  const hookInput = fs.readFileSync(0, 'utf-8');
-  if (!hookInput || !hookInput.trim()) { process.exit(0); }
-
-  let data;
-  try { data = JSON.parse(hookInput); } catch { process.exit(0); }
-  if (!data.tool_input || typeof data.tool_input !== 'object') { process.exit(0); }
-
-  const toolName = normalizeToolName(data.tool_name || 'unknown');
-  const claudeDir = path.resolve(process.env.GEMINI_PROJECT_DIR || process.cwd(), '.gemini');
-
-  const result = checkScoutBlock({
-    toolName,
-    toolInput: data.tool_input,
-    options: {
-      claudeDir,
-      ckignorePath: path.join(claudeDir, '.ckignore'),
-      checkBroadPatterns: true
-    }
-  });
-
-  if (result.isAllowedCommand) { process.exit(0); }
-
-  if (result.blocked) {
-    const reason = result.isBroadPattern
-      ? `Broad pattern blocked: ${result.reason}`
-      : `Blocked path: ${result.path} (pattern: ${result.pattern})`;
-    console.log(JSON.stringify(formatBlock(reason)));
-    process.exit(2);
+  // Early exit if hook disabled in config
+  if (!isHookEnabled('scout-block')) {
+    process.exit(0);
   }
 
-  process.exit(0);
-});
+  // Import formatters (kept local as they're Gemini-specific output)
+  const { formatBlockedError } = require('./scout-block/error-formatter.cjs');
+  const { formatBroadPatternError } = require('./scout-block/broad-pattern-detector.cjs');
+
+  const { createHookTimer, logHookCrash } = require('./lib/hook-logger.cjs');
+
+  try {
+    const timer = createHookTimer('scout-block', { event: 'PreToolUse' });
+    // Read stdin synchronously
+    const hookInput = fs.readFileSync(0, 'utf-8');
+
+    // Validate input not empty
+    if (!hookInput || hookInput.trim().length === 0) {
+      console.error('ERROR: Empty input');
+      timer.end({ status: 'error', exit: 2, note: 'empty-input' });
+      process.exit(2);
+    }
+
+    // Parse JSON
+    let data;
+    try {
+      data = JSON.parse(hookInput);
+    } catch (parseError) {
+      // Fail-open for unparseable input
+      console.error('WARN: JSON parse failed, allowing operation');
+      timer.end({ status: 'warn', exit: 0, note: 'json-parse-failed', error: parseError.message });
+      process.exit(0);
+    }
+
+    // Validate structure
+    if (!data.tool_input || typeof data.tool_input !== 'object') {
+      // Fail-open for invalid structure
+      console.error('WARN: Invalid JSON structure, allowing operation');
+      timer.end({ status: 'warn', exit: 0, note: 'invalid-structure' });
+      process.exit(0);
+    }
+
+    const toolInput = data.tool_input;
+    const toolName = data.tool_name || 'unknown';
+    const geminiDir = path.dirname(__dirname); // Go up from hooks/ to .gemini/
+
+    // Use shared scout checker
+    const result = checkScoutBlock({
+      toolName,
+      toolInput,
+      options: {
+        geminiDir,
+        ckignorePath: path.join(geminiDir, '.ckignore'),
+        checkBroadPatterns: true
+      }
+    });
+
+    // Handle allowed commands
+    if (result.isAllowedCommand) {
+      timer.end({ tool: toolName, status: 'ok', exit: 0, note: 'allowed-command' });
+      process.exit(0);
+    }
+
+    // Handle broad pattern blocks
+    if (result.blocked && result.isBroadPattern) {
+      const errorMsg = formatBroadPatternError({
+        blocked: true,
+        reason: result.reason,
+        suggestions: result.suggestions
+      }, geminiDir);
+      console.error(errorMsg);
+      timer.end({
+        tool: toolName,
+        status: 'block',
+        exit: 2,
+        target: result.pattern || toolInput.path || toolInput.file_path || '',
+        note: result.reason || 'broad-pattern'
+      });
+      process.exit(2);
+    }
+
+    // Handle pattern blocks
+    if (result.blocked) {
+      const errorMsg = formatBlockedError({
+        path: result.path,
+        pattern: result.pattern,
+        tool: toolName,
+        geminiDir: geminiDir
+      });
+      console.error(errorMsg);
+      timer.end({
+        tool: toolName,
+        status: 'block',
+        exit: 2,
+        target: result.path || '',
+        note: result.pattern || 'blocked-path'
+      });
+      process.exit(2);
+    }
+
+    // All paths allowed
+    timer.end({ tool: toolName, status: 'ok', exit: 0 });
+    process.exit(0);
+
+  } catch (error) {
+    // Fail-open for unexpected errors
+    console.error('WARN: Hook error, allowing operation -', error.message);
+    logHookCrash('scout-block', error, { event: 'PreToolUse' });
+    process.exit(0);
+  }
+} catch (e) {
+  try {
+    const { logHookCrash } = require('./lib/hook-logger.cjs');
+    logHookCrash('scout-block', e, { event: 'PreToolUse' });
+  } catch (_) {}
+  process.exit(0); // fail-open
+}

@@ -110,7 +110,7 @@ No markdown, no explanation, just JSON.
 
 ## Model-Specific Tips
 
-### Claude
+### Gemini
 - XML tags: `<thinking>`, `<answer>`, `<context>`
 - Extended thinking: "Think deeply before responding"
 - Prefill: Start assistant response to guide format

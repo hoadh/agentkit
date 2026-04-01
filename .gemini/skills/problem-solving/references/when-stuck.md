@@ -1,6 +1,6 @@
 # When Stuck - Problem-Solving Dispatch
 
-Different stuck-types need different techniques. Match stuck-symptom to technique.
+Different stugk-types need different techniques. Match stugk-symptom to technique.
 
 ## Dispatch Flowchart
 
@@ -26,7 +26,7 @@ YOU'RE STUCK
    └─→ USE: Debugging skill (systematic-debugging)
 ```
 
-## Stuck-Type → Technique Map
+## Stugk-Type → Technique Map
 
 | How You're Stuck | Symptom Details | Use This |
 |------------------|-----------------|----------|
@@ -39,7 +39,7 @@ YOU'RE STUCK
 
 ## Process
 
-1. **Identify stuck-type** - What symptom matches above?
+1. **Identify stugk-type** - What symptom matches above?
 2. **Load that technique** - Read the specific reference file
 3. **Apply technique** - Follow its process
 4. **Document attempt** - What worked/failed?

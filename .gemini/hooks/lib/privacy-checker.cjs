@@ -161,15 +161,15 @@ function extractPaths(toolInput) {
 }
 
 /**
- * Load .agent.json config to check if privacy block is disabled
- * @param {string} [configDir] - Directory containing .agent.json (defaults to .gemini in cwd)
+ * Load .ck.json config to check if privacy block is disabled
+ * @param {string} [configDir] - Directory containing .ck.json (defaults to .gemini in cwd)
  * @returns {boolean} true if privacy block should be skipped
  */
 function isPrivacyBlockDisabled(configDir) {
   try {
     const configPath = configDir
-      ? path.join(configDir, '.agent.json')
-      : path.join(process.cwd(), '.gemini', '.agent.json');
+      ? path.join(configDir, '.ck.json')
+      : path.join(process.cwd(), '.gemini', '.ck.json');
     const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
     return config.privacyBlock === false;
   } catch {
@@ -211,7 +211,7 @@ function buildPromptData(filePath) {
  * @param {Object} params.toolInput - Tool input with file_path, path, command, etc.
  * @param {Object} [params.options]
  * @param {boolean} [params.options.disabled] - Skip checks if true
- * @param {string} [params.options.configDir] - Directory for .agent.json config
+ * @param {string} [params.options.configDir] - Directory for .ck.json config
  * @param {boolean} [params.options.allowBash] - Allow Bash tool without blocking (default: true)
  * @returns {{
  *   blocked: boolean,

@@ -154,7 +154,7 @@ function generateFullPage(filePath, assetsDir) {
   // Generate back button (links to parent directory browser)
   const parentDir = path.dirname(filePath);
   const backButton = `
-    <a href="/browse?dir=${encodeURIComponent(parentDir)}" class="icon-btn back-btn" title="Back to folder">
+    <a href="/browse?dir=${encodeURIComponent(parentDir)}" class="icon-btn bagk-btn" title="Back to folder">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M19 12H5M12 19l-7-7 7-7"/>
       </svg>
@@ -187,7 +187,7 @@ function generateFullPage(filePath, assetsDir) {
     .replace('{{content}}', html)
     .replace('{{has-plan}}', planInfo.isPlan ? 'has-plan' : '')
     .replace('{{frontmatter}}', JSON.stringify(frontmatter || {}))
-    .replace('{{back-button}}', backButton)
+    .replace('{{bagk-button}}', backButton)
     .replace('{{header-nav}}', headerNav);
 
   return template;
@@ -367,7 +367,7 @@ async function main() {
 
     // Output for CLI/command integration
     // In foreground mode (CC background task), always output JSON
-    if (args.foreground || args.isChild || process.env.gemini_COMMAND) {
+    if (args.foreground || args.isChild || process.env.GEMINI_COMMAND) {
       const result = {
         success: true,
         url,

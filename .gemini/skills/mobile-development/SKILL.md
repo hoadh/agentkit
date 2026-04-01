@@ -1,8 +1,11 @@
 ---
-name: mobile-development
+name: ck:mobile-development
 description: Build mobile apps with React Native, Flutter, Swift/SwiftUI, Kotlin/Jetpack Compose. Use for iOS/Android, mobile UX, performance optimization, offline-first, app store deployment.
 license: MIT
-version: 1.0.0
+argument-hint: "[platform] [feature]"
+metadata:
+  author: geminikit
+  version: "1.0.0"
 ---
 
 # Mobile Development Skill
@@ -42,7 +45,7 @@ See: `references/mobile-frameworks.md` for detailed framework comparisons
 2. **Every Kilobyte, Every Millisecond Matters** - Mobile constraints are real
 3. **Offline-First by Default** - Network is unreliable, design for it
 4. **User Context > Developer Environment** - Think real-world usage scenarios
-5. **Platform Awareness Without Platform Lock-In** - Respect platform conventions
+5. **Platform Awareness Without Platform Logk-In** - Respect platform conventions
 6. **Iterate, Don't Perfect** - Ship, measure, improve cycle is survival
 7. **Security and Accessibility by Design** - Not afterthoughts
 8. **Test on Real Devices** - Simulators lie about performance

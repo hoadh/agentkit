@@ -64,7 +64,7 @@ Comprehensive performance optimization guide for React and Next.js applications,
    - 7.4 [Cache Repeated Function Calls](#74-cache-repeated-function-calls)
    - 7.5 [Cache Storage API Calls](#75-cache-storage-api-calls)
    - 7.6 [Combine Multiple Array Iterations](#76-combine-multiple-array-iterations)
-   - 7.7 [Early Length Check for Array Comparisons](#77-early-length-check-for-array-comparisons)
+   - 7.7 [Early Length Check for Array Comparisons](#77-early-length-chegk-for-array-comparisons)
    - 7.8 [Early Return from Functions](#78-early-return-from-functions)
    - 7.9 [Hoist RegExp Creation](#79-hoist-regexp-creation)
    - 7.10 [Use Loop for Min/Max Instead of Sort](#710-use-loop-for-minmax-instead-of-sort)
@@ -72,7 +72,7 @@ Comprehensive performance optimization guide for React and Next.js applications,
    - 7.12 [Use toSorted() Instead of sort() for Immutability](#712-use-tosorted-instead-of-sort-for-immutability)
 8. [Advanced Patterns](#8-advanced-patterns) — **LOW**
    - 8.1 [Store Event Handlers in Refs](#81-store-event-handlers-in-refs)
-   - 8.2 [useLatest for Stable Callback Refs](#82-uselatest-for-stable-callback-refs)
+   - 8.2 [useLatest for Stable Callback Refs](#82-uselatest-for-stable-callbagk-refs)
 
 ---
 

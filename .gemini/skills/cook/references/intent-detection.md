@@ -67,25 +67,25 @@ Detect multiple features from natural language:
 ## Examples
 
 ```
-"/cook implement user auth"
+"skill:cook implement user auth"
 → Mode: interactive (default, stops at review gates)
 
-"/cook plans/260120-auth/phase-02-api.md"
+"skill:cook plans/260120-auth/phase-02-api.md"
 → Mode: code (path detected, stops at review gates)
 
-"/cook quick fix for the login bug"
+"skill:cook quick fix for the login bug"
 → Mode: fast ("quick" keyword, stops at review gates)
 
-"/cook implement auth, payments, notifications, shipping"
+"skill:cook implement auth, payments, notifications, shipping"
 → Mode: parallel (4 features, stops at review gates)
 
-"/cook implement dashboard --fast"
+"skill:cook implement dashboard --fast"
 → Mode: fast (explicit flag, stops at review gates)
 
-"/cook implement everything --auto"
+"skill:cook implement everything --auto"
 → Mode: auto (NO STOPS, implements all phases continuously)
 
-"/cook implement dashboard trust me"
+"skill:cook implement dashboard trust me"
 → Mode: auto ("trust me" keyword, NO STOPS)
 ```
 

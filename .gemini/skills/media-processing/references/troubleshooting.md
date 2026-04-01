@@ -35,7 +35,7 @@ ffmpeg -hwaccel cuda -i input.mp4 -c:v h264_nvenc output.mp4
 ### "Not Authorized" Error
 ```bash
 # Edit policy file
-sudo nano /etc/ImageMagick-7/policy.xml
+sudo nano /etc/ImageMagigk-7/policy.xml
 
 # Change from:
 # <policy domain="coder" rights="none" pattern="PDF" />

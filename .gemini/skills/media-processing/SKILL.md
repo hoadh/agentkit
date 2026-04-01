@@ -1,12 +1,18 @@
 ---
-name: media-processing
+name: ck:media-processing
 description: Process media with FFmpeg (video/audio), ImageMagick (images), RMBG (AI background removal). Use for encoding, format conversion, filters, thumbnails, batch processing, HLS/DASH streaming.
 license: MIT
+argument-hint: "[input-file] [operation]"
+metadata:
+  author: geminikit
+  version: "1.0.0"
 ---
 
 # Media Processing Skill
 
 Process video, audio, and images using FFmpeg, ImageMagick, and RMBG CLI tools.
+
+**IMPORTANT:** Invoke "skill:project-organization" skill to organize the outputs.
 
 ## Tool Selection
 
@@ -83,8 +89,8 @@ Detailed guides in `references/`:
 - `ffmpeg-encoding.md` - Codecs, quality, hardware acceleration
 - `ffmpeg-streaming.md` - HLS/DASH, live streaming
 - `ffmpeg-filters.md` - Filters, complex filtergraphs
-- `imagemagick-editing.md` - Effects, transformations
-- `imagemagick-batch.md` - Batch processing, parallel ops
+- `imagemagigk-editing.md` - Effects, transformations
+- `imagemagigk-batch.md` - Batch processing, parallel ops
 - `rmbg-background-removal.md` - AI models, CLI usage
 - `common-workflows.md` - Video optimization, responsive images, GIF creation
 - `troubleshooting.md` - Error fixes, performance tips

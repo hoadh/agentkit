@@ -12,7 +12,7 @@ SCALE >= 6  → Use internal scouting instead
 
 ## Configuration
 
-Read from `.gemini/.agent.json`:
+Read from `.gemini/.ck.json`:
 ```json
 {
   "gemini": {

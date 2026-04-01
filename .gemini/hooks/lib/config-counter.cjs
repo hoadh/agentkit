@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-// Config Counter - Count CLAUDE.md, rules, MCPs, hooks across user and project scopes
+// Config Counter - Count GEMINI.md, rules, MCPs, hooks across user and project scopes
 
 const fs = require('fs');
 const path = require('path');
@@ -69,24 +69,24 @@ function countRulesInDir(rulesDir, depth = 0) {
 }
 
 function countConfigs(cwd) {
-  let claudeMdCount = 0, rulesCount = 0, mcpCount = 0, hooksCount = 0;
+  let geminiMdCount = 0, rulesCount = 0, mcpCount = 0, hooksCount = 0;
   const homeDir = os.homedir();
-  const claudeDir = path.join(homeDir, '.gemini');
+  const geminiDir = path.join(homeDir, '.gemini');
 
   // User scope
-  if (fs.existsSync(path.join(claudeDir, 'CLAUDE.md'))) claudeMdCount++;
-  rulesCount += countRulesInDir(path.join(claudeDir, 'rules'));
-  const userSettings = path.join(claudeDir, 'settings.json');
+  if (fs.existsSync(path.join(geminiDir, 'GEMINI.md'))) geminiMdCount++;
+  rulesCount += countRulesInDir(path.join(geminiDir, 'rules'));
+  const userSettings = path.join(geminiDir, 'settings.json');
   mcpCount += countMcpServersInFile(userSettings);
   hooksCount += countHooksInFile(userSettings);
   mcpCount += countMcpServersInFile(path.join(homeDir, '.gemini.json'), userSettings);
 
   // Project scope
   if (cwd) {
-    if (fs.existsSync(path.join(cwd, 'CLAUDE.md'))) claudeMdCount++;
-    if (fs.existsSync(path.join(cwd, 'CLAUDE.local.md'))) claudeMdCount++;
-    if (fs.existsSync(path.join(cwd, '.gemini', 'CLAUDE.md'))) claudeMdCount++;
-    if (fs.existsSync(path.join(cwd, '.gemini', 'CLAUDE.local.md'))) claudeMdCount++;
+    if (fs.existsSync(path.join(cwd, 'GEMINI.md'))) geminiMdCount++;
+    if (fs.existsSync(path.join(cwd, 'GEMINI.local.md'))) geminiMdCount++;
+    if (fs.existsSync(path.join(cwd, '.gemini', 'GEMINI.md'))) geminiMdCount++;
+    if (fs.existsSync(path.join(cwd, '.gemini', 'GEMINI.local.md'))) geminiMdCount++;
     rulesCount += countRulesInDir(path.join(cwd, '.gemini', 'rules'));
     mcpCount += countMcpServersInFile(path.join(cwd, '.mcp.json'));
     const projectSettings = path.join(cwd, '.gemini', 'settings.json');
@@ -97,7 +97,7 @@ function countConfigs(cwd) {
     hooksCount += countHooksInFile(localSettings);
   }
 
-  return { claudeMdCount, rulesCount, mcpCount, hooksCount };
+  return { geminiMdCount, rulesCount, mcpCount, hooksCount };
 }
 
 module.exports = { countConfigs, getMcpServerNames, countMcpServersInFile, countHooksInFile, countRulesInDir };

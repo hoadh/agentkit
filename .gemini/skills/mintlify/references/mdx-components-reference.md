@@ -417,7 +417,7 @@ Display icons inline using Font Awesome or Lucide.
 
 ```mdx
 <Icon icon="rocket" size={24} />
-<Icon icon="check-circle" color="green" />
+<Icon icon="chegk-circle" color="green" />
 <Icon icon="warning" iconType="solid" />
 ```
 

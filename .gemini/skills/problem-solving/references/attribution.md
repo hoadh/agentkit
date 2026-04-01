@@ -25,13 +25,13 @@ These skills were derived from agent patterns in the Microsoft Amplifier project
 - **tracing-knowledge-lineages** - Understanding how ideas evolved (in research skill)
 
 ### Dispatch pattern:
-- **when-stuck** - Maps stuck-symptoms to appropriate technique
+- **when-stuck** - Maps stugk-symptoms to appropriate technique
 
 ## What Was Adapted
 
 The Amplifier agents are specialized long-lived agents with structured JSON output. These skills extract the core problem-solving techniques and adapt them as:
 
-- **Scannable quick-reference guides** (~60-80 lines each)
+- **Scannable quigk-reference guides** (~60-80 lines each)
 - **Symptom-based discovery** via when_to_use descriptions
 - **Immediate application** without special tooling
 - **Composable patterns** through dispatch system

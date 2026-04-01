@@ -1,6 +1,13 @@
 {
-  "experimental": {
-    "enableAgents": true
+  "$schema": "https://json.schemastore.org/gemini-code-settings.json",
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node .gemini/statusline.cjs",
+    "padding": 0
   },
   "hooks": {
     "SessionStart": [
@@ -8,72 +15,120 @@
         "matcher": "startup|resume|clear|compact",
         "hooks": [
           {
-            "name": "gk-session-init",
             "type": "command",
-            "command": "node ~/.gemini/hooks/session-init.cjs",
-            "timeout": 5000,
-            "description": "GeminiCLI adapter: session-init"
+            "command": "node .gemini/hooks/session-init.cjs"
+          },
+          {
+            "type": "command",
+            "command": "node .gemini/hooks/session-state.cjs"
           }
         ]
       }
     ],
-    "BeforeAgent": [
+    "SubagentStart": [
       {
         "matcher": "*",
         "hooks": [
           {
-            "name": "gk-dev-rules-reminder",
             "type": "command",
-            "command": "node ~/.gemini/hooks/dev-rules-reminder.cjs",
-            "timeout": 5000,
-            "description": "GeminiCLI adapter: dev-rules-reminder"
+            "command": "node .gemini/hooks/subagent-init.cjs"
+          },
+          {
+            "type": "command",
+            "command": "node .gemini/hooks/team-context-inject.cjs"
           }
         ]
       }
     ],
-    "BeforeTool": [
+    "SubagentStop": [
       {
-        "matcher": "write_file",
+        "matcher": "Plan",
         "hooks": [
           {
-            "name": "gk-descriptive-name",
             "type": "command",
-            "command": "node ~/.gemini/hooks/descriptive-name.cjs",
-            "timeout": 5000,
-            "description": "GeminiCLI adapter: descriptive-name"
+            "command": "node .gemini/hooks/cook-after-plan-reminder.cjs"
           }
         ]
       },
       {
-        "matcher": "shell|glob|grep|read_file|edit|write_file",
         "hooks": [
           {
-            "name": "gk-scout-block",
             "type": "command",
-            "command": "node ~/.gemini/hooks/scout-block.cjs",
-            "timeout": 5000,
-            "description": "GeminiCLI adapter: scout-block"
-          },
-          {
-            "name": "gk-privacy-block",
-            "type": "command",
-            "command": "node ~/.gemini/hooks/privacy-block.cjs",
-            "timeout": 5000,
-            "description": "GeminiCLI adapter: privacy-block"
+            "command": "node .gemini/hooks/session-state.cjs"
           }
         ]
       }
     ],
-    "AfterTool": [
+    "UserPromptSubmit": [
       {
-        "matcher": "edit|write_file|multiedit",
         "hooks": [
           {
-            "name": "gk-post-edit-simplify-reminder",
             "type": "command",
-            "command": "node ~/.gemini/hooks/post-edit-simplify-reminder.cjs",
-            "timeout": 5000,
-            "description": "GeminiCLI adapter: post-edit-simplify-reminder"
+            "command": "node .gemini/hooks/dev-rules-reminder.cjs"
+          },
+          {
+            "type": "command",
+            "command": "node .gemini/hooks/usage-context-awareness.cjs",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "write_to_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .gemini/hooks/descriptive-name.cjs"
+          }
+        ]
+      },
+      {
+        "matcher": "run_command|list_dir|grep_search|view_file|replace_file_content|write_to_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .gemini/hooks/scout-block.cjs"
+          },
+          {
+            "type": "command",
+            "command": "node .gemini/hooks/privacy-block.cjs"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .gemini/hooks/session-state.cjs"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "replace_file_content|write_to_file|multi_replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .gemini/hooks/post-edit-simplify-reminder.cjs"
+          },
+          {
+            "type": "command",
+            "command": "node .gemini/hooks/plan-format-kanban.cjs"
+          }
+        ]
+      },
+      {
+        "matcher": "run_command|replace_file_content|write_to_file|multi_replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .gemini/hooks/usage-context-awareness.cjs",
+            "timeout": 10
           }
         ]
       }

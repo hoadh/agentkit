@@ -3,6 +3,12 @@
  * Tests for context-builder.cjs - rules/workflows backward compatibility
  * Run: node --test .gemini/hooks/lib/__tests__/context-builder.test.cjs
  *
+ * Issue #337: Rename workflows/ to rules/ with backward compatibility
+ * Key scenarios:
+ * - resolveRulesPath() checks rules/ first
+ * - Falls back to workflows/ if rules/ not found
+ * - resolveWorkflowPath alias works
+ * - Both directories: rules/ wins
  */
 
 const { describe, it, before, after } = require('node:test');
@@ -408,7 +414,7 @@ describe('context-builder.cjs', () => {
 
   });
 
-  describe('CLAUDE.md reference resolution', () => {
+  describe('GEMINI.md reference resolution', () => {
     let tempDir;
     let originalCwd;
 
@@ -423,7 +429,7 @@ describe('context-builder.cjs', () => {
 
     it('resolves @rules/ references correctly', () => {
       // This test verifies that the rules path resolution works
-      // which is used by CLAUDE.md @references
+      // which is used by GEMINI.md @references
       tempDir = createTempDir(['.gemini/rules']);
       createTestFile(path.join(tempDir, '.gemini/rules'), 'primary-workflow.md');
       createTestFile(path.join(tempDir, '.gemini/rules'), 'development-rules.md');
@@ -431,7 +437,7 @@ describe('context-builder.cjs', () => {
       createTestFile(path.join(tempDir, '.gemini/rules'), 'documentation-management.md');
       process.chdir(tempDir);
 
-      // All files referenced in CLAUDE.md should resolve
+      // All files referenced in GEMINI.md should resolve
       const files = [
         'primary-workflow.md',
         'development-rules.md',

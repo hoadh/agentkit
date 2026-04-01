@@ -1,4 +1,4 @@
-# Gemini Ignore File - SIZE-based blocking
+# GeminiKit Ignore File - SIZE-based blocking
 # Blocks directories with heavy file counts that fill LLM context
 # Syntax: gitignore-spec | Use ! prefix to allow (e.g., !src/vendor)
 

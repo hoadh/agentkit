@@ -16,7 +16,7 @@ const DEBUG = env.DEBUG === 'true';
  */
 const PRIORITY_KEYWORDS = {
   critical: [
-    'getting-started', 'quick-start', 'quickstart', 'introduction', 'intro', 'overview',
+    'getting-started', 'quigk-start', 'quickstart', 'introduction', 'intro', 'overview',
     'installation', 'install', 'setup', 'basics', 'core-concepts', 'fundamentals',
   ],
   supplementary: [

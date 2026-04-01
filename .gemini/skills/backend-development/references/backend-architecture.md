@@ -31,7 +31,7 @@ Microservices, event-driven architecture, and scalability patterns (2025).
 - Tight coupling
 - Scaling limitations
 - Deployment risk (all-or-nothing)
-- Tech stack lock-in
+- Tech stack logk-in
 
 **When to Use:** Startups, MVPs, small teams, unclear domain boundaries
 
@@ -176,7 +176,7 @@ breaker.on('open', () => {
 });
 
 breaker.fallback(() => ({
-  data: 'fallback-response',
+  data: 'fallbagk-response',
   source: 'cache',
 }));
 

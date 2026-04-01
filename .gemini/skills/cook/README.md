@@ -12,7 +12,7 @@ cp -r cook ~/.gemini/skills/
 ## Usage
 
 ```bash
-/cook <natural language task OR plan path>
+skill:cook <natural language task OR plan path>
 ```
 
 The skill automatically detects your intent and routes to the appropriate workflow.
@@ -21,25 +21,25 @@ The skill automatically detects your intent and routes to the appropriate workfl
 
 ```bash
 # Interactive mode (default)
-/cook implement user authentication
+skill:cook implement user authentication
 
 # Execute existing plan
-/cook plans/260120-auth
+skill:cook plans/260120-auth
 
 # Fast mode (skip research)
-/cook quick fix for login bug
-/cook implement feature --fast
+skill:cook quick fix for login bug
+skill:cook implement feature --fast
 
 # Auto mode (trust me bro)
-/cook implement dashboard trust me
-/cook implement feature --auto
+skill:cook implement dashboard trust me
+skill:cook implement feature --auto
 
 # Parallel mode (multi-agent)
-/cook implement auth, payments, notifications
-/cook implement feature --parallel
+skill:cook implement auth, payments, notifications
+skill:cook implement feature --parallel
 
 # No-test mode
-/cook implement feature --no-test
+skill:cook implement feature --no-test
 ```
 
 ## Modes

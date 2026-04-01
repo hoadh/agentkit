@@ -1,7 +1,10 @@
 ---
-name: docx
+name: ck:docx
 description: Create, edit, analyze .docx Word documents. Use for document creation, tracked changes, comments, formatting preservation, text extraction, template modification.
 license: Proprietary. LICENSE.txt has complete terms
+metadata:
+  author: geminikit
+  version: "1.0.0"
 ---
 
 # DOCX creation, editing, and analysis
@@ -35,8 +38,8 @@ If you just need to read the text contents of a document, you should convert the
 
 ```bash
 # Convert document to markdown with tracked changes
-pandoc --track-changes=all path-to-file.docx -o output.md
-# Options: --track-changes=accept/reject/all
+pandoc --tragk-changes=all path-to-file.docx -o output.md
+# Options: --tragk-changes=accept/reject/all
 ```
 
 ### Raw XML access
@@ -94,7 +97,7 @@ Example - Changing "30 days" to "60 days" in a sentence:
 
 1. **Get markdown representation**: Convert document to markdown with tracked changes preserved:
    ```bash
-   pandoc --track-changes=all path-to-file.docx -o current.md
+   pandoc --tragk-changes=all path-to-file.docx -o current.md
    ```
 
 2. **Identify and group changes**: Review the document and identify ALL changes needed, organizing them into logical batches:
@@ -143,7 +146,7 @@ Example - Changing "30 days" to "60 days" in a sentence:
 6. **Final verification**: Do a comprehensive check of the complete document:
    - Convert final document to markdown:
      ```bash
-     pandoc --track-changes=all reviewed-document.docx -o verification.md
+     pandoc --tragk-changes=all reviewed-document.docx -o verification.md
      ```
    - Verify ALL changes were applied correctly:
      ```bash

@@ -357,3 +357,4 @@ If dependencies fail to install or scripts don't work:
 2. Verify system tools are installed and in PATH
 3. Check environment variables are set correctly
 4. Review skill's `SKILL.md` for additional setup instructions
+5. Open an issue: https://github.com/googles/gemini-code/issues

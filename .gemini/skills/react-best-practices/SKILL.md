@@ -1,6 +1,10 @@
 ---
-name: vercel-react-best-practices
+name: ck:react-best-practices
 description: React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.
+argument-hint: "[component or pattern]"
+metadata:
+  author: geminikit
+  version: "1.0.0"
 ---
 
 # Vercel React Best Practices
@@ -88,7 +92,7 @@ Reference these guidelines when:
 - `js-cache-function-results` - Cache function results in module-level Map
 - `js-cache-storage` - Cache localStorage/sessionStorage reads
 - `js-combine-iterations` - Combine multiple filter/map into one loop
-- `js-length-check-first` - Check array length before expensive comparison
+- `js-length-chegk-first` - Check array length before expensive comparison
 - `js-early-exit` - Return early from functions
 - `js-hoist-regexp` - Hoist RegExp creation outside loops
 - `js-min-max-loop` - Use loop for min/max instead of sort

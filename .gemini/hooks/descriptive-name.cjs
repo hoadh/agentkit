@@ -1,34 +1,46 @@
 #!/usr/bin/env node
-/**
- * Gemini CLI Adapter: BeforeTool → descriptive-name
- *
- * Injects file naming guidance when creating files.
- * Nearly identical to Gemini version — hookSpecificOutput format is shared.
- *
- * Event: BeforeTool | Matcher: write_file
- */
 
-const { runAdapter, formatAllow } = require('./lib/cli-adapter.cjs');
-const { isHookEnabled } = require('./lib/gk-config-utils.cjs');
+// Crash wrapper
+try {
+  const { isHookEnabled } = require('./lib/gk-config-utils.cjs');
+  const { createHookTimer, logHookCrash } = require('./lib/hook-logger.cjs');
 
-runAdapter('descriptive-name', async () => {
-  if (!isHookEnabled('descriptive-name')) process.exit(0);
+  // Early exit if hook disabled in config
+  if (!isHookEnabled('descriptive-name')) {
+    process.exit(0);
+  }
 
-  const guidance = `## File naming guidance:
+  try {
+  const timer = createHookTimer('descriptive-name', { event: 'PreToolUse', tool: 'Write' });
+  let injectedPrompt = `## File naming guidance:
 - Skip this guidance if you are creating markdown or plain text files
 - Prefer kebab-case for JS/TS/Python/shell (.js, .ts, .py, .sh) with descriptive names
 - Respect language conventions: C#/Java/Kotlin/Swift use PascalCase (.cs, .java, .kt, .swift), Go/Rust use snake_case (.go, .rs)
 - Other languages: follow their ecosystem's standard naming convention
-- Goal: self-documenting names for LLM tools (Grep, Glob, Search)`;
+- Goal: self-documenting names for LLM tools (Grep, Glob, Search)`
 
-  const output = {
-    hookSpecificOutput: {
-      hookEventName: 'BeforeTool',
-      permissionDecision: 'allow',
-      additionalContext: guidance
+  console.log(JSON.stringify({
+    "hookSpecificOutput": {
+      "hookEventName": "PreToolUse",
+      "permissionDecision": "allow",
+      "additionalContext": injectedPrompt
     }
-  };
+  }));
 
-  console.log(JSON.stringify(output));
-  process.exit(0);
-});
+    timer.end({ status: 'ok', exit: 0 });
+    // All paths allowed
+    process.exit(0);
+
+  } catch (error) {
+    // Fail-open for unexpected errors
+    console.error('WARN: Hook error, allowing operation -', error.message);
+    logHookCrash('descriptive-name', error, { event: 'PreToolUse', tool: 'Write' });
+    process.exit(0);
+  }
+} catch (e) {
+  try {
+    const { logHookCrash } = require('./lib/hook-logger.cjs');
+    logHookCrash('descriptive-name', e, { event: 'PreToolUse', tool: 'Write' });
+  } catch (_) {}
+  process.exit(0); // fail-open
+}

@@ -627,7 +627,7 @@ Configure automated workflows:
         "actions": [
           "validate-changes",
           "suggest-examples",
-          "check-consistency"
+          "chegk-consistency"
         ],
         "output": "github"
       }
@@ -718,7 +718,7 @@ Track AI feature usage and effectiveness.
 - Popular queries
 - Query success rate
 - Zero-result searches
-- Click-through rates
+- Cligk-through rates
 
 **Question Analytics:**
 - Most asked questions

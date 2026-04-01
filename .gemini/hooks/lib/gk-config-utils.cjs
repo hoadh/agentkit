@@ -1,5 +1,5 @@
 /**
- * Shared utilities for AgentKit hooks
+ * Shared utilities for GeminiKit hooks
  *
  * Contains config loading, path sanitization, and common constants
  * used by session-init.cjs and dev-rules-reminder.cjs
@@ -9,8 +9,8 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-const LOCAL_CONFIG_PATH = '.gemini/.agent.json';
-const GLOBAL_CONFIG_PATH = path.join(os.homedir(), '.gemini', '.agent.json');
+const LOCAL_CONFIG_PATH = '.gemini/.ck.json';
+const GLOBAL_CONFIG_PATH = path.join(os.homedir(), '.gemini', '.ck.json');
 
 // Legacy export for backward compatibility
 const CONFIG_PATH = LOCAL_CONFIG_PATH;
@@ -60,6 +60,8 @@ const DEFAULT_CONFIG = {
     }
   },
   assertions: [],
+  statusline: 'full',
+  statuslineColors: true,
   hooks: {
     'session-init': true,
     'subagent-init': true,
@@ -68,7 +70,10 @@ const DEFAULT_CONFIG = {
     'context-tracking': true,
     'scout-block': true,
     'privacy-block': true,
-    'post-edit-simplify-reminder': true
+    'post-edit-simplify-reminder': true,
+    'task-completed-handler': true,
+    'teammate-idle-handler': true,
+    'session-state': true
   }
 };
 
@@ -297,7 +302,7 @@ function execSafe(cmd, options = {}) {
  * - 'mostRecent': REMOVED - was causing stale plan pollution
  *
  * @param {string} sessionId - Session identifier (optional)
- * @param {Object} config - AgentKit config
+ * @param {Object} config - GeminiKit config
  * @returns {{ path: string|null, resolvedBy: 'session'|'branch'|null }} Resolution result with tracking
  */
 function resolvePlanPath(sessionId, config) {
@@ -464,8 +469,8 @@ function sanitizeConfig(config, projectRoot) {
  *
  * Resolution order (each layer overrides the previous):
  *   1. DEFAULT_CONFIG (hardcoded defaults)
- *   2. Global config (~/.gemini/.agent.json) - user preferences
- *   3. Local config (./.gemini/.agent.json) - project-specific overrides
+ *   2. Global config (~/.gemini/.ck.json) - user preferences
+ *   3. Local config (./.gemini/.ck.json) - project-specific overrides
  *
  * @param {Object} options - Options for config loading
  * @param {boolean} options.includeProject - Include project section (default: true)
@@ -517,6 +522,9 @@ function loadConfig(options = {}) {
     result.skills = merged.skills || DEFAULT_CONFIG.skills;
     // Hooks configuration
     result.hooks = merged.hooks || DEFAULT_CONFIG.hooks;
+    // Statusline mode
+    result.statusline = merged.statusline || 'full';
+    result.statuslineColors = merged.statuslineColors ?? true;
 
     return sanitizeConfig(result, projectRoot);
   } catch (e) {
@@ -534,7 +542,9 @@ function getDefaultConfig(includeProject = true, includeAssertions = true, inclu
     docs: { ...DEFAULT_CONFIG.docs },
     codingLevel: -1,  // Default: disabled (no injection, saves tokens)
     skills: { ...DEFAULT_CONFIG.skills },
-    hooks: { ...DEFAULT_CONFIG.hooks }
+    hooks: { ...DEFAULT_CONFIG.hooks },
+    statusline: 'full',
+    statuslineColors: true
   };
   if (includeLocale) {
     result.locale = { ...DEFAULT_CONFIG.locale };
@@ -562,7 +572,7 @@ function escapeShellValue(str) {
 }
 
 /**
- * Write environment variable to CLAUDE_ENV_FILE (with escaping)
+ * Write environment variable to GEMINI_ENV_FILE (with escaping)
  */
 function writeEnv(envFile, key, value) {
   if (envFile && value !== null && value !== undefined) {
@@ -599,8 +609,10 @@ function getReportsPath(planPath, resolvedBy, planConfig, pathsConfig, baseDir =
   }
 
   // Return absolute path if baseDir provided
+  // Guard: if reportPath is already absolute (Issue #335 made planPath absolute),
+  // don't double-join with baseDir — path.join concatenates, not resolves
   if (baseDir) {
-    return path.join(baseDir, reportPath);
+    return path.isAbsolute(reportPath) ? reportPath : path.join(baseDir, reportPath);
   }
   return reportPath + '/';
 }
@@ -734,7 +746,7 @@ function resolveNamingPattern(planConfig, gitBranch) {
   const validation = validateNamingPattern(pattern);
   if (!validation.valid) {
     // Log warning but return pattern anyway (fail-safe)
-    if (process.env.GK_DEBUG) {
+    if (process.env.CK_DEBUG) {
       console.error(`[gk-config] Warning: ${validation.error}`);
     }
   }
@@ -761,7 +773,7 @@ function getGitRoot(cwd = null) {
 }
 
 /**
- * Extract task list ID from plan resolution for Claude Code Tasks coordination
+ * Extract task list ID from plan resolution for Gemini CLI Tasks coordination
  * Only returns ID for session-resolved plans (explicitly active, not branch-suggested)
  *
  * Cross-platform: path.basename() handles both Unix/Windows separators

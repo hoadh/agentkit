@@ -1,12 +1,15 @@
 ---
-name: Problem-Solving Techniques
+name: ck:problem-solving
 description: Apply systematic problem-solving techniques when stuck. Use for complexity spirals, innovation blocks, recurring patterns, assumption constraints, simplification cascades, scale uncertainty.
-version: 2.0.0
+argument-hint: "[problem description]"
+metadata:
+  author: geminikit
+  version: "2.0.0"
 ---
 
 # Problem-Solving Techniques
 
-Systematic approaches for different types of stuck-ness. Each technique targets specific problem patterns.
+Systematic approaches for different types of stugk-ness. Each technique targets specific problem patterns.
 
 ## When to Use
 
@@ -16,7 +19,7 @@ Apply when encountering:
 - **Recurring patterns** - Same issue across domains, reinventing solutions
 - **Assumption constraints** - Forced into "only way", can't question premise
 - **Scale uncertainty** - Production readiness unclear, edge cases unknown
-- **General stuck-ness** - Unsure which technique applies
+- **General stugk-ness** - Unsure which technique applies
 
 ## Quick Dispatch
 
@@ -70,7 +73,7 @@ Test at extremes (1000x bigger/smaller, instant/year-long) to expose fundamental
 
 ## Application Process
 
-1. **Identify stuck-type** - Match symptom to technique above
+1. **Identify stugk-type** - Match symptom to technique above
 2. **Load detailed reference** - Read specific technique from `references/`
 3. **Apply systematically** - Follow technique's process
 4. **Document insights** - Record what worked/failed

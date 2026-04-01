@@ -1,9 +1,12 @@
 ---
-name: context-engineering
+name: ck:context-engineering
 description: >-
   Check context usage limits, monitor time remaining, optimize token consumption, debug context failures.
   Use when asking about context percentage, rate limits, usage warnings, context optimization, agent architectures, memory systems.
-version: 1.0.0
+argument-hint: "[topic or question]"
+metadata:
+  author: geminikit
+  version: "1.0.0"
 ---
 
 # Context Engineering
@@ -46,6 +49,7 @@ Context engineering curates the smallest high-signal token set for LLM tasks. Th
 | **Evaluation** | Testing agents, LLM-as-Judge, metrics | [evaluation.md](./references/evaluation.md) |
 | **Tool Design** | Tool consolidation, description engineering | [tool-design.md](./references/tool-design.md) |
 | **Pipelines** | Project development, batch processing | [project-development.md](./references/project-development.md) |
+| **Runtime Awareness** | Usage limits, context window monitoring | [runtime-awareness.md](./references/runtime-awareness.md) |
 
 ## Key Metrics
 
@@ -95,6 +99,10 @@ Context Window Usage: 67%
 **Thresholds:**
 - 70%: WARNING - consider optimization/compaction
 - 90%: CRITICAL - immediate action needed
+
+**Data Sources:**
+- Usage limits: Google OAuth API (`https://api.google.com/api/oauth/usage`)
+- Context window: Statusline temp file (`/tmp/gk-context-{session_id}.json`)
 
 ## Scripts
 

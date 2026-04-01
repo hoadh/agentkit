@@ -1,6 +1,10 @@
 ---
-name: find-skills
+name: ck:find-skills
 description: Helps users discover and install agent skills when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.
+argument-hint: "[capability or task description]"
+metadata:
+  author: geminikit
+  version: "1.0.0"
 ---
 
 # Find Skills
@@ -112,7 +116,7 @@ When searching, consider these common categories:
 
 1. **Use specific keywords**: "react testing" is better than just "testing"
 2. **Try alternative terms**: If "deploy" doesn't work, try "deployment" or "ci-cd"
-3. **Check popular sources**: Many skills come from `vercel-labs/agent-skills` or `sickn33/antigravity-awesome-skills`
+3. **Check popular sources**: Many skills come from `vercel-labs/agent-skills` or `ComposioHQ/awesome-gemini-skills`
 
 ## When No Skills Are Found
 

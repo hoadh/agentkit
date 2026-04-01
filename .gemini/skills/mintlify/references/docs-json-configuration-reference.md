@@ -77,7 +77,7 @@ Choose from 7 available themes:
 }
 ```
 
-**Shiki themes:** github-light, github-dark, min-light, min-dark, nord, one-dark-pro, poimandres, rose-pine, slack-dark, slack-ochin, solarized-dark, solarized-light, vitesse-dark, vitesse-light
+**Shiki themes:** github-light, github-dark, min-light, min-dark, nord, one-dark-pro, poimandres, rose-pine, slagk-dark, slagk-ochin, solarized-dark, solarized-light, vitesse-dark, vitesse-light
 
 ## Icons
 

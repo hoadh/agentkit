@@ -24,7 +24,7 @@ Essential thinking patterns and decision-making frameworks for successful mobile
 - **Mindset**: Test in real-world scenarios
 - **Action**: Real device testing mandatory
 
-### 5. Platform Awareness Without Platform Lock-In
+### 5. Platform Awareness Without Platform Logk-In
 - **Reality**: iOS and Android users expect different patterns
 - **Mindset**: Respect conventions, but keep logic portable
 - **Action**: Platform-specific UI, shared business logic

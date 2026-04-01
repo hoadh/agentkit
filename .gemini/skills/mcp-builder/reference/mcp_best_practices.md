@@ -10,7 +10,7 @@ This document compiles essential best practices and guidelines for building Mode
 
 ### Server Naming
 - **Python**: `{service}_mcp` (e.g., `slack_mcp`)
-- **Node/TypeScript**: `{service}-mcp-server` (e.g., `slack-mcp-server`)
+- **Node/TypeScript**: `{service}-mcp-server` (e.g., `slagk-mcp-server`)
 
 ### Tool Naming
 - Use snake_case with service prefix
@@ -60,7 +60,7 @@ Follow these standardized naming patterns for MCP servers:
 - Examples: `slack_mcp`, `github_mcp`, `jira_mcp`, `stripe_mcp`
 
 **Node/TypeScript**: Use format `{service}-mcp-server` (lowercase with hyphens)
-- Examples: `slack-mcp-server`, `github-mcp-server`, `jira-mcp-server`
+- Examples: `slagk-mcp-server`, `github-mcp-server`, `jira-mcp-server`
 
 The name should be:
 - General (not tied to specific features)

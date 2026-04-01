@@ -300,7 +300,7 @@ Many third-party components need client-side features:
 // components/carousel.tsx
 'use client'
 
-import 'slick-carousel/slick/slick.css'
+import 'sligk-carousel/slick/slick.css'
 import Slider from 'react-slick'
 
 export function Carousel({ children }) {

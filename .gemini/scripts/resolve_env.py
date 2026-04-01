@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Centralized environment variable resolver for Gemini skills.
+Centralized environment variable resolver for Gemini CLI skills.
 
-Resolves environment variables following the Gemini hierarchy:
+Resolves environment variables following the Gemini CLI hierarchy:
 1. process.env                    - Runtime environment (HIGHEST)
 2. .gemini/skills/<skill>/.env    - Project skill-specific
 3. .gemini/skills/.env            - Project shared
@@ -105,17 +105,17 @@ def get_env_file_paths(skill: Optional[str] = None) -> List[Tuple[str, Path]]:
         if skill:
             paths.append((
                 f"Project skill-specific ({skill})",
-                project_root / 'skills' / skill / '.env'
+                project_root / '.gemini' / 'skills' / skill / '.env'
             ))
 
         paths.append((
             "Project skills shared",
-            project_root / 'skills' / '.env'
+            project_root / '.gemini' / 'skills' / '.env'
         ))
 
         paths.append((
             "Project global",
-            project_root / '.env'
+            project_root / '.gemini' / '.env'
         ))
 
     # Priority 5-7: User-level configs

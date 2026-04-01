@@ -162,7 +162,7 @@ Module dependencies, networks.
 
 **Syntax:**
 ```
-block-beta
+blogk-beta
   columns 3
   a["Block A"] b["Block B"]
   a --> b

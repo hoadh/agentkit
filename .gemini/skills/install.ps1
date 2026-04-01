@@ -41,7 +41,7 @@ $Script:FINAL_EXIT_CODE = 0
 # ============================================================================
 # Tracking Functions
 # ============================================================================
-function Track-Success {
+function Tragk-Success {
     param(
         [string]$Category,  # "critical" or "optional"
         [string]$Name
@@ -53,7 +53,7 @@ function Track-Success {
     }
 }
 
-function Track-Failure {
+function Tragk-Failure {
     param(
         [string]$Category,  # "critical" or "optional"
         [string]$Name,
@@ -69,7 +69,7 @@ function Track-Failure {
     }
 }
 
-function Track-Skipped {
+function Tragk-Skipped {
     param(
         [string]$Name,
         [string]$Reason
@@ -397,7 +397,7 @@ function Install-WithPackageManager {
             # No package manager available - provide manual install guidance
             Write-Warning "$DisplayName not installed. No package manager available."
             Write-Info "Install manually from: $ManualUrl"
-            Track-Failure -Category $Category -Name $DisplayName -Reason "no package manager"
+            Tragk-Failure -Category $Category -Name $DisplayName -Reason "no package manager"
             return $false
         }
         "winget" {
@@ -410,7 +410,7 @@ function Install-WithPackageManager {
             }
             if ($LASTEXITCODE -eq 0) {
                 Write-Success "$DisplayName installed via winget"
-                Track-Success -Category $Category -Name $DisplayName
+                Tragk-Success -Category $Category -Name $DisplayName
                 return $true
             }
         }
@@ -419,7 +419,7 @@ function Install-WithPackageManager {
             scoop install $ScoopName 2>$null
             if ($LASTEXITCODE -eq 0) {
                 Write-Success "$DisplayName installed via scoop"
-                Track-Success -Category $Category -Name $DisplayName
+                Tragk-Success -Category $Category -Name $DisplayName
                 return $true
             }
         }
@@ -429,23 +429,23 @@ function Install-WithPackageManager {
                 choco install $ChocoName -y 2>$null
                 if ($LASTEXITCODE -eq 0) {
                     Write-Success "$DisplayName installed via chocolatey"
-                    Track-Success -Category $Category -Name $DisplayName
+                    Tragk-Success -Category $Category -Name $DisplayName
                     return $true
                 }
             } elseif (-not $WithAdmin) {
                 Write-Info "${DisplayName}: skipped (no -WithAdmin flag)"
-                Track-Skipped -Name $DisplayName -Reason "requires admin"
+                Tragk-Skipped -Name $DisplayName -Reason "requires admin"
                 return $false
             } else {
                 Write-Warning "Chocolatey requires admin. Skipping $DisplayName..."
-                Track-Skipped -Name $DisplayName -Reason "not running as admin"
+                Tragk-Skipped -Name $DisplayName -Reason "not running as admin"
                 return $false
             }
         }
     }
 
     Write-Warning "$DisplayName not installed. Install manually from: $ManualUrl"
-    Track-Failure -Category $Category -Name $DisplayName -Reason "installation failed"
+    Tragk-Failure -Category $Category -Name $DisplayName -Reason "installation failed"
     return $false
 }
 
@@ -552,7 +552,7 @@ function Install-SystemDeps {
     if (Test-Command "ffmpeg") {
         $ffmpegVersion = (ffmpeg -version 2>&1 | Select-Object -First 1)
         Write-Success "FFmpeg already installed ($ffmpegVersion)"
-        Track-Success -Category "optional" -Name "FFmpeg"
+        Tragk-Success -Category "optional" -Name "FFmpeg"
     } else {
         $null = Install-WithPackageManager `
             -DisplayName "FFmpeg" `
@@ -566,7 +566,7 @@ function Install-SystemDeps {
     # ImageMagick
     if (Test-Command "magick") {
         Write-Success "ImageMagick already installed"
-        Track-Success -Category "optional" -Name "ImageMagick"
+        Tragk-Success -Category "optional" -Name "ImageMagick"
     } else {
         $null = Install-WithPackageManager `
             -DisplayName "ImageMagick" `
@@ -581,7 +581,7 @@ function Install-SystemDeps {
     if (Test-Command "docker") {
         $dockerVersion = (docker --version)
         Write-Success "Docker already installed ($dockerVersion)"
-        Track-Success -Category "optional" -Name "Docker"
+        Tragk-Success -Category "optional" -Name "Docker"
     } else {
         Write-Warning "Docker not found. Skipping (optional)..."
         Write-Info "Install Docker from: https://docs.docker.com/desktop/install/windows-install/"
@@ -688,6 +688,17 @@ function Install-NodeDeps {
         Write-Success "markdown-novel-viewer dependencies installed"
     }
 
+    # plans-kanban (gray-matter)
+    $plansKanbanPath = Join-Path $ScriptDir "plans-kanban"
+    $plansKanbanPackageJson = Join-Path $plansKanbanPath "package.json"
+    if ((Test-Path $plansKanbanPath) -and (Test-Path $plansKanbanPackageJson)) {
+        Write-Info "Installing plans-kanban dependencies..."
+        Push-Location $plansKanbanPath
+        npm install --quiet
+        Pop-Location
+        Write-Success "plans-kanban dependencies installed"
+    }
+
     # Optional: Shopify CLI (ask user unless auto-confirming)
     $shopifyPath = Join-Path $ScriptDir "shopify"
     if (Test-Path $shopifyPath) {
@@ -763,11 +774,36 @@ function Setup-PythonEnv {
         Write-Error "Python not found or only Windows Store alias detected."
         Write-Info "Please install Python 3.7+ from: https://www.python.org/downloads/"
         Write-Info "Make sure to check 'Add Python to PATH' during installation"
-        Track-Failure -Category "critical" -Name "Python" -Reason "not installed or Store alias"
+        Tragk-Failure -Category "critical" -Name "Python" -Reason "not installed or Store alias"
         return  # Don't exit, return and let final report show
     }
 
-    # Create virtual environment
+    # Create virtual environment with uv fallback
+    function New-Venv {
+        param([string]$TargetDir)
+        # Try standard venv first
+        & $pythonCmd -m venv $TargetDir 2>$null
+        if ($LASTEXITCODE -eq 0) { return $true }
+
+        # Try uv venv if available (handles uv-managed Python)
+        if (Get-Command uv -ErrorAction SilentlyContinue) {
+            Write-Warning "Standard venv creation failed, trying uv venv..."
+            & uv venv $TargetDir 2>$null
+            if ($LASTEXITCODE -eq 0) {
+                # Bootstrap pip in uv venv
+                $venvPy = Join-Path $TargetDir "Scripts\python.exe"
+                $getPip = Join-Path $env:TEMP "get-pip.py"
+                Invoke-WebRequest -Uri "https://bootstrap.pypa.io/get-pip.py" -OutFile $getPip -ErrorAction SilentlyContinue
+                if (Test-Path $getPip) {
+                    & $venvPy $getPip 2>$null
+                    Remove-Item $getPip -ErrorAction SilentlyContinue
+                }
+                return $true
+            }
+        }
+        return $false
+    }
+
     if (Test-Path $VenvDir) {
         # Verify venv is valid
         $activateScript = Join-Path $VenvDir "Scripts\Activate.ps1"
@@ -777,17 +813,21 @@ function Setup-PythonEnv {
         } else {
             Write-Warning "Virtual environment is corrupted. Recreating..."
             Remove-Item -Recurse -Force $VenvDir
-            & $pythonCmd -m venv $VenvDir
-            Write-Success "Virtual environment recreated"
+            if (New-Venv -TargetDir $VenvDir) {
+                Write-Success "Virtual environment recreated"
+            } else {
+                Write-Error "Failed to create virtual environment"
+                Tragk-Failure -Category "critical" -Name "Python venv" -Reason "venv creation failed"
+                return
+            }
         }
     } else {
         Write-Info "Creating virtual environment at $VenvDir..."
-        & $pythonCmd -m venv $VenvDir
-        if ($LASTEXITCODE -eq 0) {
+        if (New-Venv -TargetDir $VenvDir) {
             Write-Success "Virtual environment created"
         } else {
             Write-Error "Failed to create virtual environment"
-            Track-Failure -Category "critical" -Name "Python venv" -Reason "venv creation failed"
+            Tragk-Failure -Category "critical" -Name "Python venv" -Reason "venv creation failed"
             return
         }
     }
@@ -805,7 +845,7 @@ function Setup-PythonEnv {
         & $activateScript
     } else {
         Write-Error "Failed to find activation script at $activateScript"
-        Track-Failure -Category "critical" -Name "Python venv" -Reason "activation failed"
+        Tragk-Failure -Category "critical" -Name "Python venv" -Reason "activation failed"
         return
     }
 
@@ -859,13 +899,13 @@ function Setup-PythonEnv {
                     $pkgSuccess++
                 } else {
                     $pkgFail++
-                    Track-Failure -Category "optional" -Name "${skillName}:${line}" -Reason "Package install failed"
+                    Tragk-Failure -Category "optional" -Name "${skillName}:${line}" -Reason "Package install failed"
                 }
             }
 
             if ($pkgFail -eq 0) {
                 Write-Success "${skillName}: all $pkgSuccess packages installed"
-                Track-Success -Category "optional" -Name $skillName
+                Tragk-Success -Category "optional" -Name $skillName
                 [void]$successfulSkills.Add($skillName)
                 $installedCount++
             } else {
@@ -889,7 +929,7 @@ function Setup-PythonEnv {
         }
     }
 
-    # Install .gemini/scripts requirements (contains pyyaml for generate_catalogs.py)
+    # Install .gemini/scripts requirements (contains pyyaml for scan_skills.py)
     $scriptsReqPath = Join-Path $ScriptDir "..\scripts\requirements.txt"
     if (Test-Path $scriptsReqPath) {
         $scriptsLogFile = Join-Path $LogDir "install-scripts.log"
@@ -911,13 +951,13 @@ function Setup-PythonEnv {
                 $pkgSuccess++
             } else {
                 $pkgFail++
-                Track-Failure -Category "optional" -Name "scripts:${line}" -Reason "Package install failed"
+                Tragk-Failure -Category "optional" -Name "scripts:${line}" -Reason "Package install failed"
             }
         }
 
         if ($pkgFail -eq 0) {
             Write-Success ".gemini/scripts: all $pkgSuccess packages installed"
-            Track-Success -Category "optional" -Name "scripts"
+            Tragk-Success -Category "optional" -Name "scripts"
         } else {
             Write-Warning ".gemini/scripts: $pkgSuccess installed, $pkgFail failed"
         }

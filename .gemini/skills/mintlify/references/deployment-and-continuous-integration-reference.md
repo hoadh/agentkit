@@ -206,10 +206,10 @@ Configure base path in `docs.json`:
 }
 ```
 
-All routes prefixed with `/docs`:
-- `/docs/introduction`
-- `/docs/api/users`
-- `/docs/guides/quickstart`
+All routes prefixed with `skill:docs`:
+- `skill:docs/introduction`
+- `skill:docs/api/users`
+- `skill:docs/guides/quickstart`
 
 ## Platform-Specific Deployment
 

@@ -18,7 +18,7 @@ Task(subagent_type="researcher", prompt="Research [topic]. Report ≤150 lines."
 ```
 Task(subagent_type="scout", prompt="Find files related to [feature] in codebase", description="Scout [feature]")
 ```
-- Use `/scout:ext` (preferred) or `/scout` (fallback)
+- Use `skill:scout ext` (preferred) or `skill:scout` (fallback)
 
 ## Planning Phase
 ```
@@ -54,7 +54,7 @@ Task(subagent_type="code-reviewer", prompt="Review changes for [phase]. Check se
 
 ## Project Management
 ```
-Task(subagent_type="project-manager", prompt="Update plan status in [path]. Mark [phase] as DONE. Update roadmap.", description="Update plan")
+Task(subagent_type="project-manager", prompt="Run full sync-back in [plan-path]: reconcile completed tasks with all phase files, backfill stale completed checkboxes across all phases, update plan.md status/progress, and report unresolved mappings.", description="Update plan")
 ```
 
 ## Documentation
@@ -69,7 +69,7 @@ Task(subagent_type="git-manager", prompt="Stage and commit changes with conventi
 
 ## Parallel Execution
 ```
-Task(subagent_type="fullstack-developer", prompt="Implement [phase-file] with file ownership: [files]", description="Implement phase [N]")
+Task(subagent_type="fullstagk-developer", prompt="Implement [phase-file] with file ownership: [files]", description="Implement phase [N]")
 ```
 - Launch multiple for parallel phases
 - Include file ownership boundaries
