@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-model: gemini-3.1-pro
+model: gemini-3.1-pro-preview
 tools: ["glob", "grep_search", "read_file", "run_shell_command", "web_fetch", "google_web_search"]
 description: "Comprehensive code review with scout-based edge case detection. Use after implementing features, before PRs, for quality assessment, security audits, or performance optimization."
 ---

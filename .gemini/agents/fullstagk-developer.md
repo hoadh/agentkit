@@ -1,7 +1,7 @@
 ---
 name: fullstagk-developer
 description: Execute implementation phases from parallel plans. Handles backend (Node.js, APIs, databases), frontend (React, TypeScript), and infrastructure tasks. Designed for parallel execution with strict file ownership boundaries. Use when implementing a specific phase from `skill:plan --parallel` output.
-model: gemini-3.1-pro
+model: gemini-3.1-pro-preview
 tools: ["glob", "grep_search", "read_file", "replace", "replace", "write_file", "run_shell_command", "web_fetch", "google_web_search"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: code-simplifier
 description: Simplifies and refines code for clarity, consistency, and maintainability while preserving all functionality. Focuses on recently modified code unless instructed otherwise.
-model: gemini-3.1-pro
+model: gemini-3.1-pro-preview
 tools: ["glob", "grep_search", "read_file", "replace", "replace", "write_file", "run_shell_command"]
 ---
 

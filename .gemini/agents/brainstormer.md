@@ -1,6 +1,6 @@
 ---
 name: brainstormer
-model: gemini-3.1-pro
+model: gemini-3.1-pro-preview
 tools: ["glob", "grep_search", "read_file", "run_shell_command", "web_fetch", "google_web_search"]
 description: >-
   Use this agent when you need to brainstorm software solutions, evaluate
