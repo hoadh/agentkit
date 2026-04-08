@@ -1,8 +1,7 @@
 ---
 name: code-reviewer
 model: gemini-3.1-pro
-tools: list_dir, grep_search, view_file, run_command, read_url_content, search_web, TaskCreate, TaskGet, TaskUpdate, TaskList, SendMessage
-memory: project
+tools: ["list_dir", "grep_search", "view_file", "run_command", "read_url_content", "search_web", "TaskCreate", "TaskGet", "TaskUpdate", "TaskList", "SendMessage"]
 description: "Comprehensive code review with scout-based edge case detection. Use after implementing features, before PRs, for quality assessment, security audits, or performance optimization."
 ---
 

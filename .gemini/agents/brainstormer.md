@@ -1,7 +1,7 @@
 ---
 name: brainstormer
 model: gemini-3.1-pro
-tools: list_dir, grep_search, view_file, run_command, read_url_content, search_web, TaskCreate, TaskGet, TaskUpdate, TaskList, SendMessage
+tools: ["list_dir", "grep_search", "view_file", "run_command", "read_url_content", "search_web", "TaskCreate", "TaskGet", "TaskUpdate", "TaskList", "SendMessage"]
 description: >-
   Use this agent when you need to brainstorm software solutions, evaluate
   architectural approaches, or debate technical decisions before implementation.
