@@ -66,7 +66,7 @@ Check if Git initialized. If not:
 After early phases (research, tech stack, design), trigger downstream skills:
 
 ### Planning Phase
-Activate **ck:plan** skill with mode-appropriate flag:
+Activate **gk-plan** skill with mode-appropriate flag:
 - `--full` → `skill:plan --hard <requirements>` (thorough research + validation)
 - `--auto` → `skill:plan --auto <requirements>` (auto-detect complexity)
 - `--fast` → `skill:plan --fast <requirements>` (skip research)
@@ -75,7 +75,7 @@ Activate **ck:plan** skill with mode-appropriate flag:
 Planning skill outputs a plan path. Pass this to cook.
 
 ### Implementation Phase
-Activate **ck:cook** skill with the plan path and mode-appropriate flag:
+Activate **gk-cook** skill with the plan path and mode-appropriate flag:
 - `--full` → `skill:cook <plan-path>` (interactive review gates)
 - `--auto` → `skill:cook --auto <plan-path>` (skip review gates)
 - `--fast` → `skill:cook --auto <plan-path>` (skip review gates)

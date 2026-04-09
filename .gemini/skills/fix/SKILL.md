@@ -83,7 +83,7 @@ See `references/mode-selection.md` for AskUserQuestion format.
 **Purpose:** Understand the affected codebase BEFORE forming any hypotheses.
 
 **Mandatory skill chain:**
-1. Activate `ck:scout` skill OR launch 2-3 parallel `Explore` subagents
+1. Activate `gk-scout` skill OR launch 2-3 parallel `Explore` subagents
 2. Discover: affected files, dependencies, related tests, recent changes (`git log`)
 3. Read `./docs` for project context if unfamiliar
 
@@ -98,10 +98,10 @@ See `references/mode-selection.md` for AskUserQuestion format.
 
 **Mandatory skill chain:**
 1. **Capture pre-fix state:** Record exact error messages, failing test output, stack traces, log snippets. This becomes the baseline for Step 5 verification.
-2. Activate `ck:debug` skill (systematic-debugging + root-cause-tracing techniques).
-3. Activate `ck:sequential-thinking` skill — form hypotheses through structured reasoning, NOT guessing.
+2. Activate `gk-debug` skill (systematic-debugging + root-cause-tracing techniques).
+3. Activate `gk-sequential-thinking` skill — form hypotheses through structured reasoning, NOT guessing.
 4. Spawn parallel `Explore` subagents to test each hypothesis against codebase evidence.
-5. If 2+ hypotheses fail → auto-activate `ck:problem-solving` skill for alternative approaches.
+5. If 2+ hypotheses fail → auto-activate `gk-problem-solving` skill for alternative approaches.
 6. Create diagnosis report: confirmed root cause, evidence chain, affected scope.
 
 See `references/diagnosis-protocol.md` for full methodology.
@@ -163,15 +163,15 @@ See `references/prevention-gate.md` for prevention requirements.
 See `references/skill-activation-matrix.md` for complete matrix.
 
 **Always activate (ALL workflows):**
-- `ck:scout` (Step 1) — understand before diagnosing
-- `ck:debug` (Step 2) — systematic root cause investigation
-- `ck:sequential-thinking` (Step 2) — structured hypothesis formation
+- `gk-scout` (Step 1) — understand before diagnosing
+- `gk-debug` (Step 2) — systematic root cause investigation
+- `gk-sequential-thinking` (Step 2) — structured hypothesis formation
 
 **Conditional:**
-- `ck:problem-solving` — auto-triggers when 2+ hypotheses fail in Step 2
-- `ck:brainstorm` — multiple valid approaches, architecture decision (Deep only)
-- `ck:context-engineering` — fixing AI/LLM/agent code
-- `ck:project-management` — moderate+ for task hydration/sync-back
+- `gk-problem-solving` — auto-triggers when 2+ hypotheses fail in Step 2
+- `gk-brainstorm` — multiple valid approaches, architecture decision (Deep only)
+- `gk-context-engineering` — fixing AI/LLM/agent code
+- `gk-project-management` — moderate+ for task hydration/sync-back
 
 **Subagents:** `debugger`, `researcher`, `planner`, `code-reviewer`, `tester`, `Bash`
 **Parallel:** Multiple `Explore` agents for scouting, `Bash` agents for verification

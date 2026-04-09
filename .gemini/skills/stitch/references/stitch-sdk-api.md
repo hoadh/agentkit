@@ -129,7 +129,7 @@ try {
   const screen = await project.generate(prompt);
 } catch (error) {
   if (error.code === "RATE_LIMITED") {
-    console.error("Quota exceeded — use ck:ui-ux-pro-max fallback");
+    console.error("Quota exceeded — use gk-ui-ux-pro-max fallback");
   }
 }
 ```

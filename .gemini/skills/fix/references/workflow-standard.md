@@ -21,7 +21,7 @@ T6 = TaskCreate(subject="Finalize",               activeForm="Finalizing",      
 `TaskUpdate(T1, status="in_progress")`
 
 **Mandatory skill chain:**
-1. Activate `ck:scout` skill OR launch 2-3 parallel `Explore` subagents.
+1. Activate `gk-scout` skill OR launch 2-3 parallel `Explore` subagents.
 2. Map: affected files, module boundaries, dependencies, related tests, recent git changes.
 
 **Pattern:** In SINGLE message, launch 2-3 Explore agents:
@@ -41,10 +41,10 @@ See `references/parallel-exploration.md` for patterns.
 
 **Mandatory skill chain:**
 1. **Capture pre-fix state:** Record exact error messages, failing test output, stack traces.
-2. Activate `ck:debug` skill. Use `debugger` subagent if needed.
-3. Activate `ck:sequential-thinking` — form hypotheses through structured reasoning.
+2. Activate `gk-debug` skill. Use `debugger` subagent if needed.
+3. Activate `gk-sequential-thinking` — form hypotheses through structured reasoning.
 4. Spawn parallel `Explore` subagents to test hypotheses against codebase evidence.
-5. If 2+ hypotheses fail → auto-activate `ck:problem-solving`.
+5. If 2+ hypotheses fail → auto-activate `gk-problem-solving`.
 6. Trace backward to root cause (not just symptom location).
 
 See `references/diagnosis-protocol.md` for full methodology.
@@ -57,8 +57,8 @@ See `references/diagnosis-protocol.md` for full methodology.
 
 Fix the ROOT CAUSE per diagnosis findings. Not symptoms.
 
-- Apply `ck:problem-solving` skill if stuck
-- Use `ck:sequential-thinking` for complex logic
+- Apply `gk-problem-solving` skill if stuck
+- Use `gk-sequential-thinking` for complex logic
 - Minimal changes. Follow existing patterns.
 
 `TaskUpdate(T3, status="completed")`
@@ -96,7 +96,7 @@ See `references/review-cycle.md` for mode-specific handling.
 ### Step 6: Finalize
 `TaskUpdate(T6, status="in_progress")`
 - Report summary: root cause, changes, prevention measures, confidence score
-- Activate `ck:project-management` for task sync-back and plan status updates
+- Activate `gk-project-management` for task sync-back and plan status updates
 - Update docs if needed via `docs-manager`
 - Ask to commit via `git-manager` subagent
 - Run `skill:journal`
@@ -108,13 +108,13 @@ See `references/review-cycle.md` for mode-specific handling.
 
 | Step | Skills/Subagents |
 |------|------------------|
-| 1 | `ck:scout` OR parallel `Explore` subagents |
-| 2 | `ck:debug`, `ck:sequential-thinking`, `debugger` subagent, parallel `Explore`, (`ck:problem-solving` auto) |
-| 3 | `ck:problem-solving` (if stuck), `ck:sequential-thinking` (complex logic) |
+| 1 | `gk-scout` OR parallel `Explore` subagents |
+| 2 | `gk-debug`, `gk-sequential-thinking`, `debugger` subagent, parallel `Explore`, (`gk-problem-solving` auto) |
+| 3 | `gk-problem-solving` (if stuck), `gk-sequential-thinking` (complex logic) |
 | 4 | `tester` subagent, parallel `Bash` verification |
 | 5 | `code-reviewer` subagent |
-| 6 | `ck:project-management`, `git-manager`, `docs-manager` subagents |
+| 6 | `gk-project-management`, `git-manager`, `docs-manager` subagents |
 
 **Rules:** Don't skip steps. Validate before proceeding. One phase at a time.
-**Frontend:** Use `chrome`, `ck:chrome-devtools` or any relevant skills/tools to verify.
-**Visual Assets:** Use `ck:ai-multimodal` for visual assets generation, analysis and verification.
+**Frontend:** Use `chrome`, `gk-chrome-devtools` or any relevant skills/tools to verify.
+**Visual Assets:** Use `gk-ai-multimodal` for visual assets generation, analysis and verification.

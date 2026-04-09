@@ -24,13 +24,13 @@ Choose workflow based on input type:
 | Existing project upgrade | Redesign Audit | `./references/redesign-audit-checklist.md` |
 | From scratch | Design Thinking below | - |
 
-**All workflows**: Activate `ck:ui-ux-pro-max` skill FIRST for design intelligence.
+**All workflows**: Activate `gk-ui-ux-pro-max` skill FIRST for design intelligence.
 
-**Precedence:** When anti-slop rules (below) conflict with `ck:ui-ux-pro-max` recommendations (e.g., Inter font, AI Purple palette, Lucide-only icons), substitute with alternatives from `./references/anti-slop-rules.md` unless the user explicitly requested the conflicting choice.
+**Precedence:** When anti-slop rules (below) conflict with `gk-ui-ux-pro-max` recommendations (e.g., Inter font, AI Purple palette, Lucide-only icons), substitute with alternatives from `./references/anti-slop-rules.md` unless the user explicitly requested the conflicting choice.
 
 ## Screenshot/Video Replication (Quick Reference)
 
-1. **Analyze** with `ck:ai-multimodal` skill - extract colors, fonts, spacing, effects
+1. **Analyze** with `gk-ai-multimodal` skill - extract colors, fonts, spacing, effects
 2. **Plan** with `ui-ux-designer` subagent - create phased implementation
 3. **Implement** - match source precisely
 4. **Verify** - compare to original
@@ -69,7 +69,7 @@ Before coding, commit to a BOLD aesthetic direction:
 - **Motion**: CSS-first, anime.js for complex (`./references/animejs.md`). Orchestrated page loads > scattered micro-interactions.
 - **Spatial**: Unexpected layouts. Asymmetry. Overlap. Negative space OR controlled density.
 - **Backgrounds**: Atmosphere over solid colors. Gradients, noise, patterns, shadows, grain.
-- **Assets**: Generate with `ck:ai-multimodal`, process with `ck:media-processing`
+- **Assets**: Generate with `gk-ai-multimodal`, process with `gk-media-processing`
 
 ## Asset & Analysis References
 

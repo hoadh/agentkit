@@ -9,7 +9,7 @@ metadata:
   version: "1.0.0"
 ---
 
-# ck:autoresearch — Autonomous Optimization Loop
+# gk-autoresearch — Autonomous Optimization Loop
 
 > Constraint + Mechanical Metric + Fast Verification = Autonomous Improvement
 
@@ -24,10 +24,10 @@ metadata:
 
 | Situation | Better Tool |
 |-----------|-------------|
-| Subjective goals ("make it cleaner") | `ck:cook` |
-| Bug fixing with known root cause | `ck:fix` or `ck:debug` |
-| One-shot tasks, no repetition needed | `ck:cook` |
-| No mechanical metric to measure progress | `ck:cook --interactive` |
+| Subjective goals ("make it cleaner") | `gk-cook` |
+| Bug fixing with known root cause | `gk-fix` or `gk-debug` |
+| One-shot tasks, no repetition needed | `gk-cook` |
+| No mechanical metric to measure progress | `gk-cook --interactive` |
 | Files outside a defined scope | manual approach |
 
 ## Configuration Format

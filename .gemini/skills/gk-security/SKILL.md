@@ -1,6 +1,6 @@
 ---
 name: gk-security
-description: "STRIDE + OWASP-based security audit with optional auto-fix. Scans code for vulnerabilities, categorizes by severity, and can iteratively fix findings using ck:autoresearch pattern."
+description: "STRIDE + OWASP-based security audit with optional auto-fix. Scans code for vulnerabilities, categorizes by severity, and can iteratively fix findings using gk-autoresearch pattern."
 argument-hint: "<scope glob or 'full'> [--fix] [--iterations N]"
 metadata:
   author: geminikit
@@ -9,9 +9,9 @@ metadata:
   version: "1.0.0"
 ---
 
-# ck:security — Security Audit
+# gk-security — Security Audit
 
-Runs a structured STRIDE + OWASP security audit on a given scope. Produces a severity-ranked findings report. With `--fix`, applies fixes iteratively using the ck:autoresearch guard pattern.
+Runs a structured STRIDE + OWASP security audit on a given scope. Produces a severity-ranked findings report. With `--fix`, applies fixes iteratively using the gk-autoresearch guard pattern.
 
 ## When to Use
 
@@ -99,7 +99,7 @@ When `--fix` is provided, apply fixes iteratively after the audit:
    c. Commit: `security(fix-N): <short description>`
    d. Advance to next finding
 3. Stop early if guard fails — report the failure instead of proceeding
-4. Uses `ck:autoresearch` guard pattern for regression prevention
+4. Uses `gk-autoresearch` guard pattern for regression prevention
 
 > Tip: Use `--iterations N` to cap total fix iterations when scope is large.
 
@@ -119,10 +119,10 @@ When `--fix` is provided, apply fixes iteratively after the audit:
 
 ## Integration with Other Skills
 
-- Run after `ck:predict` when the security persona flags concerns
-- Feed Critical/High findings into `ck:autoresearch --fix` for automated remediation
-- Use `ck:scenario` with `--focus authorization` for deeper auth flow testing
-- Pair with `ck:plan` to schedule Medium/Low findings as sprint tasks
+- Run after `gk-predict` when the security persona flags concerns
+- Feed Critical/High findings into `gk-autoresearch --fix` for automated remediation
+- Use `gk-scenario` with `--focus authorization` for deeper auth flow testing
+- Pair with `gk-plan` to schedule Medium/Low findings as sprint tasks
 
 ---
 

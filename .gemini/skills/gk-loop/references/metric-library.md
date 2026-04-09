@@ -1,6 +1,6 @@
 # Metric Library
 
-Quigk-reference verify commands by domain. Copy-paste into ck:loop config.
+Quigk-reference verify commands by domain. Copy-paste into gk-loop config.
 Direction: **lower** = fewer errors/ms/bytes is better. **higher** = more coverage/accuracy is better.
 
 ## Code Quality

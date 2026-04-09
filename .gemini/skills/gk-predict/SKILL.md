@@ -9,7 +9,7 @@ metadata:
   version: "1.0.0"
 ---
 
-# ck:predict — Multi-Persona Pre-Analysis
+# gk-predict — Multi-Persona Pre-Analysis
 
 Five expert personas independently analyze a proposed change, then debate conflicts to produce a consensus verdict before a single line of code is written.
 
@@ -22,7 +22,7 @@ Five expert personas independently analyze a proposed change, then debate confli
 
 ## When NOT to Use
 
-- Trivial or low-risk changes (use `ck:debug` for bugs, `ck:plan` for already-decided tasks)
+- Trivial or low-risk changes (use `gk-debug` for bugs, `gk-plan` for already-decided tasks)
 - Already-approved work with no open design questions
 - Pure dependency upgrades with no API changes
 
@@ -103,9 +103,9 @@ Five expert personas independently analyze a proposed change, then debate confli
 
 | Workflow Step | Skill | How |
 |---------------|-------|-----|
-| Deepen risk scenarios | `ck:scenario` | Feed Risk Summary rows as feature description |
-| Create implementation plan | `ck:plan` | Attach Recommendations as constraints to planner |
-| High-risk feature implementation | `ck:cook` | Reference CAUTION/STOP items as acceptance gates |
+| Deepen risk scenarios | `gk-scenario` | Feed Risk Summary rows as feature description |
+| Create implementation plan | `gk-plan` | Attach Recommendations as constraints to planner |
+| High-risk feature implementation | `gk-cook` | Reference CAUTION/STOP items as acceptance gates |
 
 ---
 

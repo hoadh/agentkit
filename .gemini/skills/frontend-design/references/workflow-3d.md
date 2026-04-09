@@ -3,12 +3,12 @@
 Create immersive interactive 3D designs with Three.js.
 
 ## Prerequisites
-- Activate `ck:ui-ux-pro-max` skill first
-- Activate `ck:threejs` skill for 3D and WebGL expertise
-- Have `ck:ai-multimodal` skill ready for asset generation
+- Activate `gk-ui-ux-pro-max` skill first
+- Activate `gk-threejs` skill for 3D and WebGL expertise
+- Have `gk-ai-multimodal` skill ready for asset generation
 
 ## Initial Research
-Run `ck:ui-ux-pro-max` searches:
+Run `gk-ui-ux-pro-max` searches:
 ```bash
 python3 .gemini/skills/ui-ux-pro-max/scripts/search.py "<product-type>" --domain product
 python3 .gemini/skills/ui-ux-pro-max/scripts/search.py "immersive 3d" --domain style
@@ -34,13 +34,13 @@ Use `ui-ux-designer` subagent to build:
 - Interactive elements
 
 ### 3. Generate 3D Assets
-Use `ck:ai-multimodal` skill for:
+Use `gk-ai-multimodal` skill for:
 - Textures and materials
 - Skyboxes and environment maps
 - Particle sprites
 - Video backgrounds
 
-Use `ck:media-processing` skill for:
+Use `gk-media-processing` skill for:
 - Texture optimization for WebGL
 - Normal/height map generation
 - Sprite sheet creation

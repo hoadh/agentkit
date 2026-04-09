@@ -82,7 +82,7 @@ Track investigation pipelines via Gemini Native Tasks (TaskCreate, TaskUpdate, T
 
 ### 10. Frontend Verification (`references/frontend-verification.md`)
 
-Visual verification of frontend implementations via Chrome MCP (Gemini Chrome Extension) or `ck:chrome-devtools` skill fallback. Detect if frontend-related → check Chrome MCP availability → screenshot + console error check → report. Skip if not frontend.
+Visual verification of frontend implementations via Chrome MCP (Gemini Chrome Extension) or `gk-chrome-devtools` skill fallback. Detect if frontend-related → check Chrome MCP availability → screenshot + console error check → report. Skip if not frontend.
 
 **Load when:** Implementation touches frontend files (tsx/jsx/vue/svelte/html/css), UI bugs, visual regressions
 
@@ -106,10 +106,10 @@ Frontend fix   → frontend-verification.md (Chrome/devtools)
 
 - **Database:** `psql` for PostgreSQL queries and diagnostics
 - **CI/CD:** `gh` CLI for GitHub Actions logs and pipeline debugging
-- **Codebase:** `ck:docs-seeker` skill for package/plugin docs; `ck:repomix` skill for codebase summary
+- **Codebase:** `gk-docs-seeker` skill for package/plugin docs; `gk-repomix` skill for codebase summary
 - **Scouting:** `skill:scout` or `skill:scout ext` for finding relevant files
-- **Frontend:** Chrome browser or `ck:chrome-devtools` skill for visual verification (screenshots, console, network)
-- **Skills:** Activate `ck:problem-solving` skill when stuck on complex issues
+- **Frontend:** Chrome browser or `gk-chrome-devtools` skill for visual verification (screenshots, console, network)
+- **Skills:** Activate `gk-problem-solving` skill when stuck on complex issues
 
 ## Red Flags
 

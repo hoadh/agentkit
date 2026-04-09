@@ -10,12 +10,12 @@
 - Each researcher investigates a specific aspect or approach
 
 ### Sequential Thinking
-- Use `ck:sequential-thinking` skill for dynamic and reflective problem-solving
+- Use `gk-sequential-thinking` skill for dynamic and reflective problem-solving
 - Structured thinking process for complex analysis
 - Enables multi-step reasoning with revision capability
 
 ### Documentation Research
-- Use `ck:docs-seeker` skill to read and understand documentation
+- Use `gk-docs-seeker` skill to read and understand documentation
 - Research plugins, packages, and frameworks
 - Find latest technical documentation using llms.txt standard
 
